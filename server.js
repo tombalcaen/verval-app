@@ -18,6 +18,10 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
+// Create link to Angular build directory
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
+
 mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
     db = client.db("db1");
     console.log("Database connection ready");
