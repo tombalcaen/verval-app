@@ -6,7 +6,7 @@
           <div>
             <mat-checkbox class="example-margin" [checked]="item.checked" (click)="addRemove(event,item)" style="padding-left: 10px; padding-right: 10px; vertical-align: sub;"></mat-checkbox>
             <span style="display: inline-block; width: 100px; vertical-align: sub;">{{item.name}}</span><span style="vertical-align: sub;">{{item.expiration_date}}</span>
-            <span style="float:right; padding-right: 10px;">{{item.amount}}</span>
+            <span style="float:right; padding-right: 10px;">+ {{item.amount}}</span>
           </div>
         </li>
       </ul>                            
