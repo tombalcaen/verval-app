@@ -23,7 +23,7 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
-    db = client.db("db1");
+    this.db = client.db("db1");
     console.log("Database connection ready");
 
     var server = app.listen(process.env.PORT || 3000,()=>{
