@@ -22,7 +22,7 @@ mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, clien
     db = client.db("db1");
     console.log("Database connection ready");
 
-    var server = app.listen(3000,()=>{
+    var server = app.listen(process.env.PORT || 3000,()=>{
         console.log("App now running on port", server.address().port);
     })
 
