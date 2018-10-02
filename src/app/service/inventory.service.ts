@@ -25,10 +25,25 @@ export class InventoryService {
                 .catch(this.handleError);    
   }
 
-  deleteContact(delContactId: String): Promise<void | String> {
+  deleteInventory(items): Promise<any | ArrayBuffer>{
+    console.log(items.toString())
+    return this._http.delete('http://localhost:3000/inventory/' + items.toString())
+                .toPromise()
+                .then(response => response as ArrayBuffer)
+                .catch(this.handleError);
+  }
+
+  deleteItem(delContactId: String): Promise<void | string> {
     return this._http.delete('http://localhost:3000/inventory' + '/' + delContactId)
                .toPromise()
-               .then(response => response as String)
+               .then(response => response as string)
+               .catch(this.handleError);
+  }
+
+  getExpired(){
+    return this._http.get('http://localhost:3000/inventory/expired/')
+               .toPromise()
+               .then(response => response as string)
                .catch(this.handleError);
   }
 
