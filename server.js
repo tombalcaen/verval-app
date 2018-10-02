@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var objectId = mongodb.ObjectID;
 var db;
-var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/test?retryWrites=true';
+var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/db1?retryWrites=true';
 
 var app = express();
 
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
-mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) {
     db = client.db("db1");
     console.log("Database connection ready");
 
