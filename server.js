@@ -1,6 +1,7 @@
 var express = require("express");
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
+var path = require("path");
 var objectId = mongodb.ObjectID;
 var db;
 var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/db1?retryWrites=true';
@@ -19,7 +20,9 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist";
+
+//var distDir = path.join(__dirname + '/dist/')
+var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) {
@@ -28,6 +31,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: t
 
     var server = app.listen(process.env.PORT || 3000,()=>{
         console.log("App now running on port", server.address().port);
+        console.log(__dirname)
     })
 
    //client.close();
@@ -37,10 +41,6 @@ function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
     res.status(code || 500).json({"error": message});
 }
-
-app.get('*', (req, res) => {
-    res.sendFile(`./dist/index.html`); // load the single view file (angular will handle the page changes on the front-end)
-});
 
 app.get('/inventory',(req,res)=>{    
     db.collection('inventory').find({}).toArray(function(err, docs) {
