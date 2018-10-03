@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 var distDir = __dirname + "/dist/verval-app/";
 app.use(express.static(distDir));
 
-mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) {
+mongodb.MongoClient.connect(uri, { useNewUrlParser: true }, function (err, client) { //process.env.MONGODB_URI ||
     db = client.db("db1");
     console.log("Database connection ready");
 
