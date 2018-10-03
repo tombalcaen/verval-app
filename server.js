@@ -4,7 +4,7 @@ var mongodb = require('mongodb');
 var path = require("path");
 var objectId = mongodb.ObjectID;
 var db;
-var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/db1?retryWrites=true';
+var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/test?retryWrites=true';
 
 var app = express();
 
