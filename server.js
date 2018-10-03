@@ -38,6 +38,10 @@ function handleError(res, reason, message, code) {
     res.status(code || 500).json({"error": message});
 }
 
+app.get('*', (req, res) => {
+    res.sendFile(`./front-end/dist/index.html`); // load the single view file (angular will handle the page changes on the front-end)
+});
+
 app.get('/inventory',(req,res)=>{    
     db.collection('inventory').find({}).toArray(function(err, docs) {
         if (err) {
