@@ -26,7 +26,8 @@ var distDir = __dirname + "/dist/verval-app/";
 app.use(express.static(distDir));
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) { //
-    db = client.db("db1");
+    //db = client.db("db1");
+    db = client.db("heroku_90qwhmmx");    
     console.log("Database connection ready");
 
     var server = app.listen(process.env.PORT || 3000,()=>{
