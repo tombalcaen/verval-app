@@ -19,7 +19,7 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
-var distDir = __dirname + "/dist/";
+var distDir = __dirname + "/front-end/dist/";
 app.use(express.static(distDir));
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) {
