@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 var distDir = __dirname + "/dist/verval-app/";
 app.use(express.static(distDir));
 
-console.log(process.env.MONGODB_MLABURI)
+console.log('url::::    ' + process.env.MONGODB_MLABURI)
 
 mongodb.MongoClient.connect(process.env.MONGODB_MLABURI || uri, { useNewUrlParser: true }, function (err, client) { //
     //db = client.db("db1");
