@@ -29,7 +29,7 @@ app.use(express.static(distDir));
 
 console.log('url::::    ' + process.env.MONGODB_MLABURI)
 
-mongodb.MongoClient.connect(process.env.MONGODB_MLABURI || uri, { useNewUrlParser: true }, function (err, client) { //
+mongodb.MongoClient.connect(process.env.MONGODB_MLABURI || uri, function (err, client) { // { useNewUrlParser: true }
     //db = client.db("db1");
     db = client.db("heroku_90qwhmmx");    
     console.log("Database connection ready");
