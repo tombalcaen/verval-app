@@ -5,7 +5,7 @@ var path = require("path");
 var objectId = mongodb.ObjectID;
 var db;
 var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/test?retryWrites=true';
-
+var mlab_uri = "mongodb://tombalcaen:updvrf5n@ds221003.mlab.com:21003/heroku_90qwhmmx"
 var app = express();
 
 //enable cors
@@ -24,6 +24,8 @@ app.use(bodyParser.json());
 //var distDir = path.join(__dirname + '/dist/')
 var distDir = __dirname + "/dist/verval-app/";
 app.use(express.static(distDir));
+
+console.log(process.env.MONGODB_URI)
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || uri, { useNewUrlParser: true }, function (err, client) { //
     //db = client.db("db1");
