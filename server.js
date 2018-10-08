@@ -1,35 +1,55 @@
-var express = require("express");
-var bodyParser = require('body-parser');
-var mongodb = require('mongodb');
-var path = require("path");
-var objectId = mongodb.ObjectID;
+const express = require("express");
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const mongodb = require('mongodb');
 var db;
-var uri = 'mongodb+srv://tombalcaen:updvrf5n@cluster0-maywt.gcp.mongodb.net/test?retryWrites=true';
-var mlab_uri = "mongodb://tombalcaen:updvrf5n@ds221003.mlab.com:21003/heroku_90qwhmmx";
+const users = require('./routes/users');
+const inventory = require('./routes/inventory');
+const config = require('./config/database');
 
+const app = express();
 
-var app = express();
+//mongodb middleware
+mongoose.connect(config.uri);
 
-//enable cors
+mongoose.connection.on('connected',()=>{
+  console.log("Database connection ready");
+});
+
+mongoose.connection.on('error',(err)=>{
+  console.log("database error: " + err)
+})
+
+//enable cors middleware
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
-
 app.use(allowCrossDomain);
+
+//bodyparser middleware
 app.use(bodyParser.json());
 
-// Create link to Angular build directory
-
-//var distDir = path.join(__dirname + '/dist/')
+//serve static files, this is the base of our front end: aka the angular app
 var distDir = __dirname + "/dist/verval-app/";
 app.use(express.static(distDir));
 
-console.log('url::::    ' + process.env.MONGODB_MLABURI)
+//routes middelware
+app.use('/users', users);
+app.use('/inventory', inventory);
 
-mongodb.MongoClient.connect(process.env.MONGODB_MLABURI || uri, function (err, client) { // { useNewUrlParser: true }
+var server = app.listen(process.env.PORT || 3000,()=>{
+    console.log("App now running on port", server.address().port);
+    console.log(__dirname)
+})
+
+/*mongodb.MongoClient.connect(process.env.MONGODB_URI || config.uri,{ useNewUrlParser: true }, function (err, client) { // 
+    if(err){
+        console.log(err)
+    } else console.log(client)
+
     //db = client.db("db1");
     db = client.db("heroku_90qwhmmx");    
     console.log("Database connection ready");
@@ -40,13 +60,14 @@ mongodb.MongoClient.connect(process.env.MONGODB_MLABURI || uri, function (err, c
     })
 
    //client.close();
-});
+});*/
 
 function handleError(res, reason, message, code) {
     console.log("ERROR: " + reason);
     res.status(code || 500).json({"error": message});
 }
 
+/*
 app.get('/inventory',(req,res)=>{    
     db.collection('inventory').find({}).toArray(function(err, docs) {
         if (err) {
@@ -69,7 +90,7 @@ app.get('/inventory/expired',(req,res)=>{
 });
 
 app.get('/inventory/:id',(req,res)=>{    
-    db.collection('inventory').find({"_id" : new objectId(req.params.id)}, (err, result)=>{
+    db.collection('inventory').find({"_id" : new mongodb.ObjectID(req.params.id)}, (err, result)=>{
         if(err){
             handleError(res, err.message, "failed to get item.")
         } else {
@@ -98,7 +119,7 @@ app.post('/inventory',(req,res)=>{
 
 app.delete("/inventory/:id", function(req, res) {        
     var test = req.params.id.split(",").map((data)=>{
-        return new objectId(data)            
+        return new mongodb.ObjectID(data);         
     })
 
     db.collection('inventory').remove({"_id": { $in: test}}, function(err, result) {            
@@ -107,14 +128,14 @@ app.delete("/inventory/:id", function(req, res) {
         } else {
             res.status(200).json(req.params.id);
         }
-    });          
+    });        
 
-    /*db.collection('inventory').deleteOne({"_id": new objectId(req.params.id)}, function(err, result) {
-      if (err) {
-        handleError(res, err.message, "Failed to delete contact");
-      } else {
-        res.status(200).json(req.params.id);
-      }
-    });*/
-  });
+    // db.collection('inventory').deleteOne({"_id": new objectId(req.params.id)}, function(err, result) {
+    //   if (err) {
+    //     handleError(res, err.message, "Failed to delete contact");
+    //   } else {
+    //     res.status(200).json(req.params.id);
+    //   }
+    // });
+  });*/
 
