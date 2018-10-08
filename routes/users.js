@@ -27,9 +27,23 @@ router.post('/authenticate',(req,res,next)=>{
     res.send("authenticate");
 })
 
+router.get('/',(req,res,next)=>{
+    console.log(req.query.username)
+    User.getUserByUsername(req.query.username,(user)=>{
+        console.log('terug')
+        console.log(user)
+        res.json(user)
+    })    
+})
+
 //profile
 router.get('/profile',(req,res,next)=>{
     res.send("profile");
+})
+
+router.get('/find',(req,res,next)=>{
+    console.log('ik zit in router find')
+    User.getUserById(req.body.id)
 })
 
 module.exports = router;
