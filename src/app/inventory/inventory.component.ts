@@ -20,6 +20,12 @@ export class InventoryComponent implements OnInit {
 
   inventory = [];
 
+  options = {
+    gender : ['a','b','c']
+  }
+
+  test = "null";
+
   blnDelete : boolean = false;
 
   createNewItemFormGroup(){
@@ -37,10 +43,11 @@ export class InventoryComponent implements OnInit {
   getInventory(){  
     this.inventory = [];  
     this._inventory.getInventory().then((data)=>{      
-      data.map((d)=>{
+      console.log(data)
+      /*data.map((d)=>{
         d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
         d.checked = false;
-      })
+      })*/
       this.inventory = data;   
     })
   }

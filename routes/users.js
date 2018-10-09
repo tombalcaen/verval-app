@@ -3,6 +3,19 @@ const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const config = require('../config/database')
+
+
+router.get('/',(req,res,next)=>{ 
+    User.getUserByUsername(req.query.username,(err,user)=>{
+        console.log(err)
+        console.log(user)
+        if(err) res.json({success: false, message: "user not found!"})
+        else { 
+            res.json(user)
+        } 
+    })    
+})
 
 //register
 router.post('/register',(req,res,next)=>{
@@ -24,21 +37,39 @@ router.post('/register',(req,res,next)=>{
 
 //authenticate
 router.post('/authenticate',(req,res,next)=>{
-    res.send("authenticate");
-})
+    const username = req.body.username;
+    const password = req.body.password;
 
-router.get('/',(req,res,next)=>{
-    console.log(req.query.username)
-    User.getUserByUsername(req.query.username,(user)=>{
-        console.log('terug')
-        console.log(user)
-        res.json(user)
-    })    
+    User.getUserByUsername(username,(err,user)=>{
+        if(err) throw(err);
+        if(!user){
+            return res.json({success: false, message: "user not found!"})
+        }
+        
+        User.comparePassword(password,user.password,(err,isMatch)=>{
+          if(err) throw(err);
+          if(isMatch){              
+            const token = jwt.sign(user.toJSON(),config.secret,{expiresIn: 804600})            
+            res.json({
+                success: true, 
+                token: 'JWT ' +token, 
+                user:{
+                    id: user._id,
+                    name: user.name,
+                    username: user.username,
+                    email: user.email
+                    }
+            })
+          } else {
+            return res.json({success: false, message: "user not found!"})
+          }
+        })
+    })
 })
 
 //profile
-router.get('/profile',(req,res,next)=>{
-    res.send("profile");
+router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{
+    res.json({user: req.user});
 })
 
 router.get('/find',(req,res,next)=>{

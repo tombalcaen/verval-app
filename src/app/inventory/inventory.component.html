@@ -49,6 +49,14 @@
       </div>
     </mat-tab>              
   </mat-tab-group>
+
+  <div class="input input--select u-fillRemaining">
+      <select [(ngModel)]="test">
+          <option [ngValue]="null">Select Gender</option>
+          <option [value]="gender" *ngFor="let gender of options.gender">{{gender}}</option>
+      </select>
+  </div>
+
   
   <div *ngIf="blnDelete" class="control" style="position: absolute; width: 100%; bottom: 5px; left: 0; padding: 5px;">
     <button class="btn btn-danger" style="width: 100%" (click)="deleteInventory()">Delete</button>

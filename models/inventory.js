@@ -11,7 +11,5 @@ const inventorySchema = mongoose.Schema({
 const Inventory = module.exports = mongoose.model('inventory', inventorySchema);
 
 module.exports.getInventory = function(){
-    Inventory.find((err,items)=>{
-        console.log(items)
-    })
+    Inventory.find(callback)
 }

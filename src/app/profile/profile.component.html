@@ -1,0 +1,33 @@
+<!--<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 50px; border-bottom: 1px solid #e0e0e0;">
+        <a (click)="back()"><i class="material-icons" style="font-size: 50px; color: darkcyan;">keyboard_arrow_left</i></a>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div id="body" style="overflow-y:auto;scroll-behavior: smooth;" #scroll>
+  <section>
+    <div id="container">
+      <div id="text" (click)="hiHo()">
+        {{placeholder[i]}}
+      </div>
+    </div>
+    <a href="#" class="scroll-down" style="color:black" (click)="scrollDown()"></a>
+  </section>
+  <section class="ok">
+    <p>
+      <a style="color:black" href="http://quotes.yourdictionary.com/articles/funny-fortune-cookie-sayings.html">Source</a>
+      <br>
+      <a>Music </a>
+      <i style="font-size: 50px" (click)=playAudio() class="btn glyphicon glyphicon-play-circle"></i>
+      <i style="font-size: 50px" (click)=stopAudio() class="btn glyphicon glyphicon-pause"></i>
+    </p>
+  </section>
+  <section>
+    <div id="container">
+    </div>
+  </section>
+</div>

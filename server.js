@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const mongodb = require('mongodb');
+const passport = require('passport');
 var db;
 const users = require('./routes/users');
 const inventory = require('./routes/inventory');
@@ -31,6 +32,12 @@ app.use(allowCrossDomain);
 
 //bodyparser middleware
 app.use(bodyParser.json());
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 //serve static files, this is the base of our front end: aka the angular app
 var distDir = __dirname + "/dist/verval-app/";
