@@ -15,13 +15,21 @@ import {MatCheckboxModule,
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { TopNavComponent } from './top-nav/top-nav.component';
+import { FrontpageComponent } from './frontpage/frontpage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegisterComponent,
+    LoginComponent,
+    TopNavComponent,
+    FrontpageComponent
   ],
   imports: [
     BrowserModule,

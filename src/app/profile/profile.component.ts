@@ -21,9 +21,4 @@ export class ProfileComponent implements OnInit {
       console.log(user)
     })
   }
-
-  back(){
-    this._location.back();
-  }
-
 }

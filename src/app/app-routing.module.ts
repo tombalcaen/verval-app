@@ -4,11 +4,15 @@ import { CommonModule } from '@angular/common';
 
 import { InventoryComponent } from './inventory/inventory.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inventory', pathMatch: 'full' },
   { path: 'inventory', component: InventoryComponent },
   { path: 'profile',  component: ProfileComponent },
+  { path: 'register',  component: RegisterComponent },
+  { path: 'login',  component: LoginComponent },
   /*{ path: 'emailverify',  component: EmailVerifyComponent },
   { path: 'register',  component: RegisterComponent },
   { path: 'about', component: AboutComponent},
