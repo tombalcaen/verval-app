@@ -11,7 +11,7 @@ const config = require('./config/database');
 const app = express();
 
 //mongodb middleware
-mongoose.connect(config.uri);
+mongoose.connect(config.mlab_uri, {useNewUrlParser: true});
 
 mongoose.connection.on('connected',()=>{
   console.log("Database connection ready");
