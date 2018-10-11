@@ -25,6 +25,7 @@ module.exports.addUser = function(user,callback){
         bcrypt.hash(user.password, salt, (err, hash)=>{      
             if(err) throw err;
             user.password = hash;            
+            console.log(user)
             user.save(callback);
         })
     })

@@ -6,11 +6,15 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { FrontpageComponent } from './frontpage/frontpage.component';
+
+import { AuthService } from './service/auth.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'inventory', pathMatch: 'full' },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'profile',  component: ProfileComponent },
+  { path: 'welcome',  component: FrontpageComponent },
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthService] },
+  { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },
   { path: 'register',  component: RegisterComponent },
   { path: 'login',  component: LoginComponent },
   /*{ path: 'emailverify',  component: EmailVerifyComponent },

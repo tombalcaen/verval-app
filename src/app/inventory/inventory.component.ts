@@ -42,14 +42,14 @@ export class InventoryComponent implements OnInit {
 
   getInventory(){  
     this.inventory = [];  
-    this._inventory.getInventory().then((data)=>{      
+    /*this._inventory.getInventory().then((data)=>{      
       console.log(data)
-      /*data.map((d)=>{
-        d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
-        d.checked = false;
-      })*/
+      // data.map((d)=>{
+      //   d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
+      //   d.checked = false;
+      // })
       this.inventory = data;   
-    })
+    })*/
   }
 
   createInventory(formData){ 

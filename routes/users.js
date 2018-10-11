@@ -26,6 +26,8 @@ router.post('/register',(req,res,next)=>{
       password: req.body.password
   });
 
+  console.log(newUser)
+
   User.addUser(newUser, (err, user)=>{
     if(err){
         res.json({success: false, message: "failed to register user."})
@@ -69,6 +71,7 @@ router.post('/authenticate',(req,res,next)=>{
 
 //profile
 router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{
+    console.log(req.user)
     res.json({user: req.user});
 })
 

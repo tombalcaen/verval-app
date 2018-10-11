@@ -1,7 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" style="padding: 0;">
       <top-nav></top-nav>
+      <div class="" style="height: calc(100vh - 50px);">
+        <div class="user-container" style="margin-top: 50px;">
+          <div class="user-container-header"></div>
+          <div *ngIf="user" class="user-container-data">
+            <div class="user-container-data__username">Username: {{user?.username}}</div>
+            <div class="user-container-data__email">Email: {{user?.email}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

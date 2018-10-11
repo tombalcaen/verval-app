@@ -10,7 +10,7 @@
       <li class="col-3">
         <a class="nav-link" routerLink="/inventory">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">person</i></span>
+            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">receipt</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Inventory</span>
           </div>          
         </a>
@@ -26,16 +26,16 @@
       <li class="col-3">
         <a class="nav-link" href="#">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">feedback</i></span>
+            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">favorite</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Feedback</span>
           </div>          
         </a>
       </li>
       <li class="col-3">
-        <a class="nav-link" href="#">
+        <a class="nav-link" (click)="logout()">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">message</i></span>
-            <span style="display: block; font-size: 10px; vertical-align: top;">Contact</span>
+            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">power_settings_new</i></span>
+            <span style="display: block; font-size: 10px; vertical-align: top;">Logout</span>
           </div>          
         </a>
       </li>

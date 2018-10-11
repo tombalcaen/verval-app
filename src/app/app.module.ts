@@ -19,6 +19,12 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { AuthService } from './service/auth.service';
+import { JwtModule,JwtHelperService } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -44,9 +50,17 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3001'],
+        blacklistedRoutes: ['localhost:3001/auth/']
+      }
+    })
   ],
-  providers: [],
+  providers: [JwtHelperService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

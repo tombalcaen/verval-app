@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <top-nav style="display: block"></top-nav>
-      <form [formGroup]="registerForm" (ngSubmit)="onRegister()" style="display: block; width: 300px; margin-left: auto; margin-right: auto;">        
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm.value)" style="display: block; width: 300px; margin-left: auto; margin-right: auto;">        
         <div class="example-container" style="margin-top: 80px;">
 
           <div class="text-center" style="margin: 30px 0px">
@@ -11,26 +11,31 @@
 
           <div style="width: 270px; margin-left: auto; margin-right: auto;">
             <mat-form-field style="width: 270px">
-              <input formControlName="username" #username id="username" matInput placeholder="Username">
+              <input formControlName="username" #username id="username" matInput placeholder="Username" required>
+              <mat-error *ngIf="registerForm.controls['username'].hasError('required')">Please enter an username!</mat-error>
             </mat-form-field>
           </div>
         
           <div style="width: 270px; margin-left: auto; margin-right: auto;">
             <mat-form-field style="width: 270px">
-              <input formControlName="email" #email id="email" matInput placeholder="Email">
+              <input formControlName="email" #email id="email" matInput placeholder="Email" required>
+              <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Please enter an email!</mat-error>
             </mat-form-field>
           </div>
         
           <div style="width: 270px; margin-left: auto; margin-right: auto;">
             <mat-form-field style="width: 270px">
-              <input formControlName="password" #password id="password" type="password" matInput placeholder="Password">
+              <input formControlName="password" #password id="password" type="password" matInput placeholder="Password" required>
+              <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Please enter an password!</mat-error>
             </mat-form-field>
           </div>
           
           <div style="width: 270px; margin-left: auto; margin-right: auto;">
-            <button mat-flat-button color="primary" type="submit" [disabled]="!registerForm.valid" style="width: 100%">Register</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" style="width: 100%">Register</button>
           </div>
-
+          <div style="width: 270px; margin: 10px auto;">            
+            <a routerLink="/login"><span class="" style="color: lightgrey; font-size: 12px; font-weight: 200;">Already have an account?</span></a>
+          </div>
         </div>
       </form>
     </div>
