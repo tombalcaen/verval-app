@@ -48,7 +48,9 @@ app.use(express.static(distDir));
 app.use('/users', users);
 app.use('/inventory', inventory);
 
-var server = app.listen(process.env.PORT || 3000,()=>{
+
+
+var server = app.listen(process.env.MONGODB_URI || 3000,()=>{
     console.log("App now running on port", server.address().port);
     console.log(__dirname)
 })
