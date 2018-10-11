@@ -50,7 +50,7 @@ app.use('/inventory', inventory);
 
 console.log(process.env.MONGODB_MLABURI)
 
-var server = app.listen(process.env.MONGODB_MLABURI || 3000,()=>{
+var server = app.listen(process.env.PORT || 3000,()=>{
     console.log("App now running on port", server.address().port);
     console.log(__dirname)
 })
