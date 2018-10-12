@@ -25,7 +25,7 @@ export class AuthService implements CanActivate{
   authenticateUser(user): Observable<any>{
     let header = new HttpHeaders();
     header.append('Content-type','application/json');
-    return this._http.post(environment.connection_uri + '/users/authenticate',user,{headers: header}); //https://ripe-avocado.herokuapp.com/
+    return this._http.post(environment.connection_uri + 'users/authenticate',user,{headers: header}); //https://ripe-avocado.herokuapp.com/
   }
 
   getProfile(): Observable<any>{
@@ -34,7 +34,7 @@ export class AuthService implements CanActivate{
       'Authorization':this.authToken,
       'Content-Type':'application/json'
     });
-    return this._http.get(environment.connection_uri + '/users/profile',{headers: header});
+    return this._http.get(environment.connection_uri + 'users/profile',{headers: header});
   }
 
   loadToken(){
@@ -45,7 +45,7 @@ export class AuthService implements CanActivate{
   registerUser(user): Observable<any>{
     let header = new HttpHeaders();
     header.append('Content-type','application/json');
-    return this._http.post(environment.connection_uri + '/users/register',user,{headers: header});
+    return this._http.post(environment.connection_uri + 'users/register',user,{headers: header});
   }
 
   storeUserData(token,user){    
