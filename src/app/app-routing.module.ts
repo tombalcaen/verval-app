@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
-
+import { StoryComponent } from './story/story.component';
 import { AuthService } from './service/auth.service';
 
 const routes: Routes = [
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'welcome',  component: FrontpageComponent },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthService] },
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },
+  { path: 'story',  component: StoryComponent, canActivate: [AuthService] },
   { path: 'register',  component: RegisterComponent },
   { path: 'login',  component: LoginComponent },
   /*{ path: 'emailverify',  component: EmailVerifyComponent },

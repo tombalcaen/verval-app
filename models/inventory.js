@@ -11,18 +11,14 @@ const inventorySchema = mongoose.Schema({
 
 const Inventory = module.exports = mongoose.model('inventory', inventorySchema);
 
-module.exports.getInventory = function(uid,callback){
-    console.log(uid)
-    console.log('inside models inventory')
+module.exports.getInventory = function(uid,callback){    
     Inventory.find({uid: uid},callback)
 }
 
-module.exports.addItem = function(item,callback){
-    console.log(item)
+module.exports.addItem = function(item,callback){    
     item.save(callback);
 }
 
-module.exports.deleteItem = function(items,callback){
-    console.log(items)
-    Inventory.delete({id: { $in: items}},callback);
+module.exports.deleteItem = function(items,callback){ 
+    Inventory.deleteMany({_id: { $in: items}},callback);
 }

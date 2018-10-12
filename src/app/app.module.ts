@@ -21,6 +21,7 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthService } from './service/auth.service';
 import { JwtModule,JwtHelperService } from '@auth0/angular-jwt';
+import { StoryComponent } from './story/story.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -35,7 +36,8 @@ export function tokenGetter() {
     RegisterComponent,
     LoginComponent,
     TopNavComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    StoryComponent
   ],
   imports: [
     BrowserModule,

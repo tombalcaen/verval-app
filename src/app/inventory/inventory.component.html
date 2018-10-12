@@ -1,16 +1,22 @@
 <!--<div class="container" style="padding: 0; margin: 0;">-->
-  <mat-tab-group mat-stretch-tabs class="">    
-    <mat-tab label="mijne frigo">
-      <div class="container">
-        <ul class="row" style="border-bottom: 1px solid #e0e0e0; list-style: none; padding: 0;">        
+  <mat-tab-group mat-stretch-tabs (selectedTabChange)="resetRemove()" class="">    
+    <mat-tab label="expired">
+      <ng-template mat-tab-label>
+          <i class="material-icons" style="padding: 0px 5px;">sentiment_very_dissatisfied</i> 
+          <!-- <span>Mijne frigo</span> -->
+      </ng-template>
+      <div class="container" style="height: calc(100vh - 90px)">
+        <ul class="row" style="list-style: none; padding: 0; margin-bottom: 0;">
+          <li class="text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;"><div class="">Expired food</div></li>
           <li *ngIf="inventory.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
             <div class="">Er zit niks meer in uwe frigo</div>
           </li>
-          <li class="col-12" *ngFor="let item of inventory; let l = index">
+          <li class="col-12" *ngFor="let item of expired; let l = index">
             <div>
-              <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemove()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
-              <span style="display: inline-block; width: 100px; vertical-align: sub;">{{item.name}}</span><span style="vertical-align: sub; max-width: 100px;">{{item.expiration_date}}</span>
-              <span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>
+              <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemoveExpired()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
+              <span class="item-name">{{item.name}}</span>
+              <span style="float: right; vertical-align: sub; max-width: 100px;">{{item.expired_since}}</span>
+              <!--<span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>-->
             </div>
           </li>
         </ul> 
@@ -18,21 +24,28 @@
       </div>                     
       
     </mat-tab>      
-    <mat-tab label="toevoegen">      
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i class="material-icons">add</i>
+        <!-- <span>Toevoegen</span> -->
+      </ng-template>
       <div class="row">    
-        <div class="col-12">
+        <div class="col-12" style="height: calc(100vh - 90px)">
           <div class="container">
             <form class="row" [formGroup]="addForm" (ngSubmit)="createInventory(addForm.value)">
-              <div class="col-12 form-group">
-                <mat-form-field appearance="outline" style="width: 100%;">
+              <div class="col-12 text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;">
+                <span>Add food</span>
+              </div>
+              <div class="col-12 form-group" style="margin-top: 20px;">
+                <mat-form-field style="width: 100%;">
                   <input type="text" formControlName="name" matInput placeholder="Naam">
                 </mat-form-field>          
               </div>
-              <div class="col-12 form-group">
+              <!--<div class="col-12 form-group">
                 <mat-form-field appearance="outline" style="width: 100%;">
-                  <input type="number" formControlName="amount" matInput placeholder="Aantal" min="0">
+                  <input formControlName="amount" matInput placeholder="Aantal">
                 </mat-form-field>                              
-              </div>
+              </div>-->
               <div class="col-12 form-group">
                 <mat-form-field class="example-full-width" style="width: 100%;">
                   <input formControlName="expiration_date" matInput [matDatepicker]="picker" placeholder="Verval datum">
@@ -47,10 +60,33 @@
           </div>
         </div>
       </div>
-    </mat-tab>              
+    </mat-tab>
+    <mat-tab label="mijne frigo">
+      <ng-template mat-tab-label>
+          <i class="material-icons" style="padding: 0px 5px;">view_list</i>
+          <!-- <span>Mijne frigo</span> -->
+      </ng-template>
+      <div class="container" style="height: calc(100vh - 90px)">
+        <ul class="row" style="list-style: none; padding: 0; margin-bottom: 0;">
+            <li class="text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;"><div class="">All food</div></li>
+          <li *ngIf="inventory.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
+            <div class="">Er zit niks meer in uwe frigo</div>
+          </li>
+          <li class="col-12" *ngFor="let item of inventory; let l = index">
+            <div>
+              <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemove()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
+              <span class="item-name">{{item.name}}</span>
+              <span style="float: right; vertical-align: sub; max-width: 100px;">{{item.expiration_date}}</span>
+              <!--<span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>-->
+            </div>
+          </li>
+        </ul> 
+        <!--<button class="" (click)="getExpired()">get expired</button>-->
+      </div>                             
+    </mat-tab>                    
   </mat-tab-group>
   
-  <div *ngIf="blnDelete" class="control" style="position: absolute; width: 100%; bottom: 10vh; left: 0; padding: 5px;">
+  <div *ngIf="blnDelete" class="control" style="position: absolute; width: 100px; bottom: 10vh; right: 10px; padding: 5px; z-index: 5;">
     <button class="btn btn-danger" style="width: 100%" (click)="deleteInventory()">Delete</button>
   </div>  
 <!--</div>-->

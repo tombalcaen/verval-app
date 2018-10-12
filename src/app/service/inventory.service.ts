@@ -32,7 +32,7 @@ export class InventoryService {
 
   deleteInventory(items): Promise<any | ArrayBuffer>{  
     console.log(items)  
-    return this._http.delete('http://localhost:3000/inventory/?items=' + items.toString(","))
+    return this._http.delete('http://localhost:3000/inventory/?items=' + items)
                 .toPromise()
                 .then(response => response as ArrayBuffer)
                 .catch(this.handleError);

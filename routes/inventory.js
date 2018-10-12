@@ -3,8 +3,7 @@ const router = express.Router();
 const Inventory = require("../models/inventory");
 
 router.get('/',(req,res,next)=>{    
-    Inventory.getInventory(req.query.uid,(err, items)=>{
-        console.log(items)
+    Inventory.getInventory(req.query.uid,(err, items)=>{        
     if(err){
         res.json({success: false, message: "failed to register user."})
       } else {
@@ -30,11 +29,16 @@ router.post('/',(req,res,next)=>{
       });
 })
 
-router.delete('/',(req,res,next)=>{
-    console.log(req.query.items)
-    Inventory.deleteItem(req.query.items,(err,Item)=>{
+router.delete('/',(req,res,next)=>{    
+    var test = req.query.items.split(",").map((data)=>{
+        return data;         
+    })
+
+    Inventory.deleteItem(test,(err,Item)=>{ 
         if(err){
             res.json({success: false, message: "could not delete items."})
+        } else {
+            res.json({success: true, message: "Items deleted!"})
         }
     })
 })

@@ -18,6 +18,7 @@ export class InventoryComponent implements OnInit {
       this.createNewItemFormGroup();
    }
 
+  expired = [];
   inventory = [];
 
   options = {
@@ -41,26 +42,25 @@ export class InventoryComponent implements OnInit {
   }
 
   getInventory(){  
+    this.expired = [];
     this.inventory = []; 
     this._inventory.getInventory().subscribe((data)=>{
       data.map((d)=>{
+        if(moment().add(5,'days').isSameOrAfter(moment(d.expiration_date))){
+          this.expired.push({
+            checked : false,
+            name: d.name,
+            expired_since: moment(d.expiration_date).fromNow()
+          })
+        }
         d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
         d.checked = false;
       })
-      this.inventory = data;
+      this.inventory = data;      
     }); 
-    /*this._inventory.getInventory().then((data)=>{      
-      console.log(data)
-      // data.map((d)=>{
-      //   d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
-      //   d.checked = false;
-      // })
-      this.inventory = data;   
-    })*/
   }
 
   createInventory(formData){
-  
     var createData = {
       uid: JSON.parse(localStorage.getItem('user')).id,
       name: formData.name,
@@ -86,8 +86,7 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  deleteItem(){    
-    var id = '5bb0a0c81c9d4400006c26ff';
+  deleteItem(id){    
     this._inventory.deleteItem(id).then((data)=>{      
       this.getInventory();
     })
@@ -97,6 +96,13 @@ export class InventoryComponent implements OnInit {
     this.blnDelete = this.inventory.some((a)=>{
      return a.checked == true;
     })    
+  }
+
+  resetRemove(){
+    this.inventory.map((item)=>{
+      item.checked = false;
+    })
+    this.blnDelete = false;
   }
 
   getExpired(){

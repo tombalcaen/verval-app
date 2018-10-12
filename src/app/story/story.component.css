@@ -1,0 +1,34 @@
+h2{
+    margin: 1em;
+    font-weight: 300;
+    color: darkcyan;
+}
+
+h5{
+    
+}
+
+p{
+    color: grey;
+    font-weight: 200;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    list-style: none;
+}
+
+.donate-button{
+    margin-bottom: 20px;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
