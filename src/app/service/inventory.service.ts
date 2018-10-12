@@ -24,7 +24,7 @@ export class InventoryService {
   }
 
   createInventory(newItem): Promise<void | Item>{    
-    return this._http.post('http://localhost:3000/inventory/', newItem)
+    return this._http.post(environment.connection_uri + 'inventory/', newItem)
                 .toPromise()
                 .then(response => response as Item)
                 .catch(this.handleError);    
@@ -32,21 +32,21 @@ export class InventoryService {
 
   deleteInventory(items): Promise<any | ArrayBuffer>{  
     console.log(items)  
-    return this._http.delete('http://localhost:3000/inventory/?items=' + items)
+    return this._http.delete(environment.connection_uri + 'inventory/?items=' + items)
                 .toPromise()
                 .then(response => response as ArrayBuffer)
                 .catch(this.handleError);
   }
 
   deleteItem(delContactId: String): Promise<void | string> {
-    return this._http.delete('http://localhost:3000/inventory' + '/' + delContactId)
+    return this._http.delete(environment.connection_uri + 'inventory/' + delContactId)
                .toPromise()
                .then(response => response as string)
                .catch(this.handleError);
   }
 
   getExpired(){
-    return this._http.get('http://localhost:3000/inventory/expired/')
+    return this._http.get(environment.connection_uri + 'inventory/expired/')
                .toPromise()
                .then(response => response as string)
                .catch(this.handleError);
