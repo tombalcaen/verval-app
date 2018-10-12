@@ -11,7 +11,8 @@ import {MatCheckboxModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatTabsModule} from '@angular/material';
+        MatTabsModule,
+        MatIconModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
@@ -22,6 +23,8 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthService } from './service/auth.service';
 import { JwtModule,JwtHelperService } from '@auth0/angular-jwt';
 import { StoryComponent } from './story/story.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -52,6 +55,7 @@ export function tokenGetter() {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+    MatIconModule,
     AppRoutingModule,
     HttpClientModule,
     JwtModule.forRoot({
@@ -60,7 +64,8 @@ export function tokenGetter() {
         whitelistedDomains: ['localhost:3001'],
         blacklistedRoutes: ['localhost:3001/auth/']
       }
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [JwtHelperService,AuthService],
   bootstrap: [AppComponent]

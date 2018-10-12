@@ -17,6 +17,11 @@ export class LoginComponent implements OnInit {
               private _router: Router,
               private _auth: AuthService) { }
 
+
+  errorMsg: string = "";
+  blnError: boolean = false;
+  blnPassword = true;
+
   ngOnInit() {
     this.createLoginForm();
   }
@@ -35,16 +40,20 @@ export class LoginComponent implements OnInit {
     }
 
     this._auth.authenticateUser(user).subscribe((data)=>{
-      if(data.success){
-        console.log("succesfully logged in")
+      if(data.success){        
         this._auth.storeUserData(data.token,data.user);  
         this._router.navigate(['/inventory']);
       } else {
-        console.log(data.message);
-        this._router.navigate(['/login']);
+        this.blnError = true;
+        this.errorMsg = data.message;
+        this.loginForm.reset();
+        //this._router.navigate(['/login']);
       }
     })
+  }
 
+  changeType(){    
+    this.blnPassword = !this.blnPassword;
   }
 
 }

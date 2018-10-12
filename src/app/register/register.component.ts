@@ -17,6 +17,10 @@ export class RegisterComponent implements OnInit {
               private _auth: AuthService,
               private _router: Router) { }
 
+  blnError: boolean = false;
+  errorMsg: string = "";
+  blnPassword = true;
+
   ngOnInit() {
     this.createRegisterForm();
   }
@@ -40,13 +44,17 @@ export class RegisterComponent implements OnInit {
       console.log(data)
       if(data.success){
         this._router.navigate(['/login'])
-        console.log("You are successfully registered.");
+        //console.log("You are successfully registered.");
       } else {
-        this._router.navigate(['/register'])
-        console.log("some thing went wrong");
+        this.blnError = true;
+        this.errorMsg = "Couldn't create user."
+        //this._router.navigate(['/register']) 
       }
     });
+  }
 
+  changeType(){    
+    this.blnPassword = !this.blnPassword;
   }
 
 }
