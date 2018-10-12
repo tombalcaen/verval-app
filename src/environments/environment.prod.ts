@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  connection_uri: 'https://ripe-avocado.herokuapp.com'
 };

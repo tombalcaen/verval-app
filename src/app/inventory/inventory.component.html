@@ -8,13 +8,13 @@
           </li>
           <li class="col-12" *ngFor="let item of inventory; let l = index">
             <div>
-              <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemove()" style="padding-left: 10px; padding-right: 10px; vertical-align: sub;"></mat-checkbox>
-              <span style="display: inline-block; width: 100px; vertical-align: sub;">{{item.name}}</span><span style="vertical-align: sub;">{{item.expiration_date}}</span>
-              <span style="float:right; padding-right: 10px;">{{item.amount}}</span>
+              <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemove()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
+              <span style="display: inline-block; width: 100px; vertical-align: sub;">{{item.name}}</span><span style="vertical-align: sub; max-width: 100px;">{{item.expiration_date}}</span>
+              <span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>
             </div>
           </li>
         </ul> 
-        <button class="" (click)="getExpired()">get expired</button>        
+        <!--<button class="" (click)="getExpired()">get expired</button>-->
       </div>                     
       
     </mat-tab>      
@@ -50,7 +50,7 @@
     </mat-tab>              
   </mat-tab-group>
   
-  <div *ngIf="blnDelete" class="control" style="position: absolute; width: 100%; bottom: 5px; left: 0; padding: 5px;">
+  <div *ngIf="blnDelete" class="control" style="position: absolute; width: 100%; bottom: 10vh; left: 0; padding: 5px;">
     <button class="btn btn-danger" style="width: 100%" (click)="deleteInventory()">Delete</button>
   </div>  
 <!--</div>-->

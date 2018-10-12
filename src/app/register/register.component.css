@@ -1,3 +1,14 @@
 .col-12{
     padding: 0;
 }
+
+.register-button{
+    margin-bottom: 20px;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}

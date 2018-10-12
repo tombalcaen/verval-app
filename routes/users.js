@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database')
 
 
-router.get('/',(req,res,next)=>{ 
+router.get('/',(req,res,next)=>{     
     User.getUserByUsername(req.query.username,(err,user)=>{
         console.log(err)
         console.log(user)
@@ -70,8 +70,8 @@ router.post('/authenticate',(req,res,next)=>{
 })
 
 //profile
-router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{
-    console.log(req.user)
+router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{    
+    console.log('ik zit in router profile')
     res.json({user: req.user});
 })
 

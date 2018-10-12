@@ -11,7 +11,7 @@
           <p>Save money & eat your food before it expires</p>
         </div>        
       </div>
-      <div class="action-container">
+      <div *ngIf="!loggedIn()" class="action-container">
         <div class="creat-account-container" style="">          
           <button routerLink="/register" class="btn btn-primary register-button">create an account</button>
         </div>
@@ -19,6 +19,11 @@
           <div>            
             <a routerLink="/login" ><span class="" style="color: lightgrey; font-size: 12px; font-weight: 200;">Already have an account?</span></a>
           </div>
+        </div>
+      </div>
+      <div *ngIf="loggedIn()" class="action-container">
+        <div class="continue-container">
+          <button routerLink="/inventory" class="btn btn-primary register-button">Go explore</button>
         </div>
       </div>
     </div>

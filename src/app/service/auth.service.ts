@@ -47,9 +47,7 @@ export class AuthService implements CanActivate{
     return this._http.post('https://ripe-avocado.herokuapp.com/users/register',user,{headers: header});
   }
 
-  storeUserData(token,user){
-    console.log(token)
-    console.log(user)
+  storeUserData(token,user){    
     localStorage.setItem("id_token",token);
     localStorage.setItem("user",JSON.stringify(user));
     this.authToken = token;

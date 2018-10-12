@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {environment} from "../../environments/environment";
+import { AuthService } from "./auth.service";
 
 interface Item {
   _id?: string;
@@ -12,22 +15,24 @@ interface Item {
 })
 export class InventoryService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient,
+              private _auth: AuthService) { }
 
-  getInventory(): Promise<any>{    
-    return this._http.get('http://localhost:3000/inventory').toPromise();
+  getInventory(): Observable<any>{
+    var uid = JSON.parse(localStorage.getItem('user')).id
+    return this._http.get(environment.connection_uri + 'inventory/?uid=' + uid);
   }
 
-  createInventory(newItem): Promise<void | Item>{
-    return this._http.post('http://localhost:3000/inventory', newItem)
+  createInventory(newItem): Promise<void | Item>{    
+    return this._http.post('http://localhost:3000/inventory/', newItem)
                 .toPromise()
                 .then(response => response as Item)
                 .catch(this.handleError);    
   }
 
-  deleteInventory(items): Promise<any | ArrayBuffer>{
-    console.log(items.toString())
-    return this._http.delete('http://localhost:3000/inventory/' + items.toString())
+  deleteInventory(items): Promise<any | ArrayBuffer>{  
+    console.log(items)  
+    return this._http.delete('http://localhost:3000/inventory/?items=' + items.toString(","))
                 .toPromise()
                 .then(response => response as ArrayBuffer)
                 .catch(this.handleError);

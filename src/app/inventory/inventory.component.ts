@@ -41,7 +41,14 @@ export class InventoryComponent implements OnInit {
   }
 
   getInventory(){  
-    this.inventory = [];  
+    this.inventory = []; 
+    this._inventory.getInventory().subscribe((data)=>{
+      data.map((d)=>{
+        d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
+        d.checked = false;
+      })
+      this.inventory = data;
+    }); 
     /*this._inventory.getInventory().then((data)=>{      
       console.log(data)
       // data.map((d)=>{
@@ -52,9 +59,16 @@ export class InventoryComponent implements OnInit {
     })*/
   }
 
-  createInventory(formData){ 
-    console.log(formData)   
-    this._inventory.createInventory(formData).then((data)=>{
+  createInventory(formData){
+  
+    var createData = {
+      uid: JSON.parse(localStorage.getItem('user')).id,
+      name: formData.name,
+      amount: formData.amount,
+      expiration_date: formData.expiration_date
+    }
+    
+    this._inventory.createInventory(createData).then((data)=>{
       this.getInventory();
     })
   }

@@ -11,7 +11,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AuthService } from './service/auth.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'inventory', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: 'welcome',  component: FrontpageComponent },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthService] },
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },

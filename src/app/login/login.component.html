@@ -16,10 +16,14 @@
             <mat-form-field style="width: 100%;">
               <input formControlName="password" #password id="password" type="password" matInput placeholder="Password">
             </mat-form-field>
-          </div>
+          </div>   
+          <div class="creat-account-container" style="">          
+            <button class="btn btn-primary login-button" type="submit" [disabled]="!loginForm.valid" style="width: 300px;">Log in</button>
+          </div>       
           
-          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid" style="width: 300px;">Log in</button>
-
+          <div style="width: 270px; margin: 10px auto;">            
+            <a routerLink="/register"><span class="" style="color: lightgrey; font-size: 12px; font-weight: 200;">No account yet?</span></a>
+          </div>
         </div>
       </form>
     </div>
