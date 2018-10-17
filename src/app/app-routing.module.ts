@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { StoryComponent } from './story/story.component';
 import { AuthService } from './service/auth.service';
+import { ScanComponent } from './scan/scan.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthService] },
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },
   { path: 'story',  component: StoryComponent, canActivate: [AuthService] },
+  { path: 'scan',  component: ScanComponent, canActivate: [AuthService] },
   { path: 'register',  component: RegisterComponent },
   { path: 'login',  component: LoginComponent },
   /*{ path: 'emailverify',  component: EmailVerifyComponent },

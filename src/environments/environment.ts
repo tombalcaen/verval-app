@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  connection_uri: 'http://localhost:3000/'
+  connection_uri: 'http://localhost:3000/',
+  publicKey: "BDQ_GMoYMQr4HKsUCksZJDs_KGXBUNzTyaGtqapM7bBpFWIrECcXlP-zzmEhPQ5nIfH2iwNlZ3piKdSTRumqsyM",
+  privateKey: "W4DuePTQNCKXXn-opavZ3BX5E8BPVGIOJ_rDAes9W8M"
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

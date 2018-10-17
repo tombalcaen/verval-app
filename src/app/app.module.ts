@@ -12,7 +12,9 @@ import {MatCheckboxModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatTabsModule,
-        MatIconModule} from '@angular/material';
+        MatIconModule,
+        MatProgressBarModule,
+        MatSnackBarModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
@@ -25,6 +27,10 @@ import { JwtModule,JwtHelperService } from '@auth0/angular-jwt';
 import { StoryComponent } from './story/story.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ItemComponent } from './item/item.component';
+
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ScanComponent } from './scan/scan.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -40,7 +46,9 @@ export function tokenGetter() {
     LoginComponent,
     TopNavComponent,
     FrontpageComponent,
-    StoryComponent
+    StoryComponent,
+    ItemComponent,
+    ScanComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +64,11 @@ export function tokenGetter() {
     MatNativeDateModule,
     MatTabsModule,
     MatIconModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     AppRoutingModule,
     HttpClientModule,
+    ZXingScannerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 import { InventoryService } from '../service/inventory.service';
 
 import * as moment from 'moment/moment';
@@ -14,7 +14,8 @@ export class InventoryComponent implements OnInit {
   addForm : FormGroup;
 
   constructor(private _inventory: InventoryService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              public snackBar: MatSnackBar) {
       this.createNewItemFormGroup();
    }
 
@@ -50,7 +51,8 @@ export class InventoryComponent implements OnInit {
           this.expired.push({
             checked : false,
             name: d.name,
-            expired_since: moment(d.expiration_date).fromNow()
+            expired_since: moment(d.expiration_date).fromNow(),
+            expired_date: d.expiration_date
           })
         }
         d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
@@ -68,8 +70,10 @@ export class InventoryComponent implements OnInit {
       expiration_date: formData.expiration_date
     }
     
-    this._inventory.createInventory(createData).then((data)=>{
+    this._inventory.createInventory(createData).then((data)=>{      
+      this.snackBar.open("Added item: " + formData.name, "OK" , {duration: 3000})
       this.getInventory();
+      this.addForm.reset();      
     })
   }
 
@@ -95,13 +99,24 @@ export class InventoryComponent implements OnInit {
   addRemove(){
     this.blnDelete = this.inventory.some((a)=>{
      return a.checked == true;
-    })    
+    })
+  }
+
+  addRemoveExpired(){
+    this.blnDelete = this.expired.some((a)=>{
+      return a.checked == true;
+     })
   }
 
   resetRemove(){
     this.inventory.map((item)=>{
       item.checked = false;
     })
+
+    this.expired.map((item)=>{
+      item.checked = false;
+    })
+
     this.blnDelete = false;
   }
 
@@ -109,6 +124,10 @@ export class InventoryComponent implements OnInit {
     this._inventory.getExpired().then((data)=>{
       console.log(data)
     })
+  }
+
+  getColor(expired_date){
+    if(moment().diff(moment(expired_date), 'day') >= 0) return 'alert-danger';
   }
 
 }

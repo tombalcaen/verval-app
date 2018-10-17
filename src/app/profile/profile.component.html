@@ -3,11 +3,45 @@
     <div class="col-12" style="padding: 0;">
       <top-nav></top-nav>
       <div class="" style="height: calc(100vh - 50px);">
-        <div class="user-container" style="margin-top: 50px;">
+        <div class="hero-container text-center" style="height: 50vh; border-bottom: 5px solid coral; background: linear-gradient(135deg,#23074d,#ca4d76,#f7bb90);">
+          <div style="position: absolute; top: 15vh; left: 30vw;">
+            <div style=" height: 40vw; width: 40vw; border-radius: 50%; border: 5px solid lightcoral;">
+              <!-- <i class="material-icons">account_box</i> -->
+              <!-- <i class="material-icons" style="font-size: 119px;">insert_emoticon</i> -->
+              <!-- <i class="material-icons">accessibility</i> -->
+            </div>
+            <div style="padding: 5px;"><strong>{{user?.username}}</strong></div>
+          </div>
+          
+        </div>
+        <!-- <div>
+          <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+        </div> -->
+        <div class="user-container" style="">
           <div class="user-container-header"></div>
           <div *ngIf="user" class="user-container-data">
-            <div class="user-container-data__username">Username: {{user?.username}}</div>
-            <div class="user-container-data__email">Email: {{user?.email}}</div>
+            <ul style="list-style: none; padding: 0;">
+              <li style="height: 60px;">
+                <div style="height: 100%; line-height: 60px; text-align: center; margin: 0px 20px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="float: left; font-size: 14px;"><strong>Avocado Status</strong></span>
+                    <span style="float: right; font-size: 14px; font-weight: 300;">Avocado Seed</span>
+                </div>                
+              </li>
+              <li style="height: 60px;">
+                <div style="height: 100%; line-height: 60px; text-align: center; margin: 0px 20px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="float: left; font-size: 14px;"><strong>Total points</strong></span>
+                    <span style="float: right; font-size: 14px; font-weight: 300;">400 xp</span>
+                </div>                
+              </li>
+              <li style="height: 60px;">
+                <div style="height: 100%; line-height: 60px; text-align: center; margin: 0px 20px; border-bottom: 1px solid #e0e0e0;">
+                    <span style="float: left; font-size: 14px;"><strong>Points to next status</strong></span>
+                    <span style="float: right; font-size: 14px; font-weight: 300;">800 xp</span>
+                </div>                
+              </li>
+            </ul>
+            <!-- <div class="user-container-data__username">Username: </div> -->
+            <!-- <div class="user-container-data__email">Email: {{user?.email}}</div> -->
           </div>
         </div>
       </div>
