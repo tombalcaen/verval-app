@@ -1,0 +1,30 @@
+<div class="container" style="z-index: 1;">
+  <div>
+    <form class="row" [formGroup]="addForm" (ngSubmit)="addItemToBasket(addForm.value)" style="background-color: darkcyan;">                   
+      <div class="col-12 form-group" style="margin-top: 20px;">
+        <div class="form-group" style="margin: 0;">          
+          <input formControlName="name" type="text" class="form-control" aria-describedby="addItem" placeholder="Add item">          
+          <a routerLink="/scan" style="color: black; position: absolute; top: 3px; right: 20px;"><i class="fas fa-barcode fa-2x"></i></a>
+          <button class="add" type="submit" style="position: absolute; position: absolute; width: 30px; border: 1px solid #e0e0e0; border-radius: 50%; top: 4px; right: 60px; height: 30px; text-align: center;">+</button>
+        </div>        
+        <!-- <mat-form-field [floatLabel]="'never'" style="width: 100%;">
+          <input type="text" formControlName="name" matInput placeholder="Add item">
+          <mat-icon matSuffix routerLink='/scan'><i class="fas fa-barcode"></i></mat-icon>                  
+        </mat-form-field>           -->
+      </div>
+    </form>
+  </div>
+  <div>
+    <ul class="row" style="list-style: none; padding: 0; margin-bottom: 0;">    
+      <li *ngIf="basket.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
+        <div class="">No items in your shopping basket</div>
+      </li>
+      <li class="col-12" *ngFor="let item of basket; let l = index" style="padding: 0;">
+        <div style="padding: 10px 10px; border-bottom: 1px solid #e0e0e0;">
+          <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="RemoveBasketItems()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
+          <span class="item-name" [class.strikethrough]="item.checked" style="vertical-align: middle;">{{item.name}}</span>                    
+        </div>
+      </li>
+    </ul> 
+  </div>  
+</div>                     

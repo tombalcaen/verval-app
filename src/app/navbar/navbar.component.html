@@ -1,29 +1,53 @@
-<div class="pos-f-t bottom-nav">  
+<div class="pos-f-t bottom-nav" style="z-index: 10; background-color: white;">  
   <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      <h5 class="text-white h4">Collapsed content</h5>
-      <span class="text-muted">Toggleable via the navbar brand.</span>
+    <div class="bg-dark">
+      <ul class="row">
+        <li routerLink='/story' class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
+          <a class="">
+            <div routerLink='/story'>
+              <span style="margin-right: 20px;"><i class="material-icons" style="vertical-align: middle;">favorite</i></span>
+              <span style="">Feedback</span>
+            </div>          
+          </a>
+        </li>
+        <li class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
+          <a class="" (click)="logout()">
+            <div>
+              <span style="margin-right: 20px;"><i class="material-icons" style="vertical-align: middle;">power_settings_new</i></span>
+              <span style="">Logout</span>
+            </div>          
+          </a>
+        </li>
+      </ul>      
     </div>
   </div>    
-  <nav class="container navbar-light" style="border-top: 1px solid #e0e0e0;">
+  <nav class="container navbar-light" style="border-top: 1px solid darkgrey; background-color: #e0e0e003;">
     <ul class="row text-center">
       <li class="col-3">
         <a class="nav-link" routerLink="/inventory">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">receipt</i></span>
+            <span style="display: block;"><i class="nav-link-icon material-icons" style="vertical-align: middle;">receipt</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Inventory</span>
           </div>          
         </a>
       </li>
       <li class="col-3">
+        <a class="nav-link" routerLink="/shopping-cart">
+          <div>
+            <span style="display: block;"><i class="nav-link-icon fas fa-shopping-basket"></i></span>
+            <span style="display: block; font-size: 10px; vertical-align: top;">Basket</span>
+          </div>          
+        </a>
+      </li>      
+      <li class="col-3">
         <a class="nav-link" routerLink="/profile">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">person</i></span>
+            <span style="display: block;"><i class="nav-link-icon material-icons" style="vertical-align: middle;">person</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Profile</span>
           </div>          
         </a>
-      </li>
-      <li class="col-3">
+      </li>      
+      <!--<li class="col-2">
         <a class="nav-link" routerLink='/story'>
           <div>
             <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">favorite</i></span>
@@ -31,25 +55,25 @@
           </div>          
         </a>
       </li>
-      <li class="col-3">
+      <li class="col-2">
         <a class="nav-link" (click)="logout()">
           <div>
             <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">power_settings_new</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Logout</span>
           </div>          
         </a>
-      </li>
-      <!--<li class="col-3">
-        <a class="nav-link" href="#">
+      </li>-->
+      <li class="col-3">
+        <a class="nav-link" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <div>
-            <span style="display: block;"><i class="material-icons" style="vertical-align: middle;">favorite</i></span>
-            <span style="display: block; font-size: 10px; vertical-align: top;">Support</span>
+            <span style="display: block;"><i class="nav-link-icon fas fa-cog"></i></span>
+            <span style="display: block; font-size: 10px; vertical-align: top;">Options</span>
           </div>          
         </a>
-      </li>-->
+      </li>
     </ul>
-    <!--<a class="" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <a class="" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon" style="display: inline-block;"></span>      
-    </a>-->
+    </a> -->
   </nav>
 </div>

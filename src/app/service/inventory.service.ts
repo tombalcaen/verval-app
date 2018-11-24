@@ -10,6 +10,11 @@ interface Item {
   expiration_date: Date;
 }
 
+interface BasketItem {
+  _id?: string;
+  name: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +55,18 @@ export class InventoryService {
                .toPromise()
                .then(response => response as string)
                .catch(this.handleError);
+  }
+
+  getBasket(): Observable<any>{
+    var uid = JSON.parse(localStorage.getItem('user')).id
+    return this._http.get(environment.connection_uri + 'basket/?uid=' + uid);
+  }
+
+  createBasket(newBasketItem): Promise<void | BasketItem>{    
+    return this._http.post(environment.connection_uri + 'basket/', newBasketItem)
+                .toPromise()
+                .then(response => response as BasketItem)
+                .catch(this.handleError);    
   }
 
   private handleError (error: any) {

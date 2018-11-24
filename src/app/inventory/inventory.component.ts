@@ -21,6 +21,7 @@ export class InventoryComponent implements OnInit {
 
   expired = [];
   inventory = [];
+  foods = [{name: "all food", value: 0},{name: "frigo", value: 0},{name: "kelder", value: 0}]
 
   options = {
     gender : ['a','b','c']

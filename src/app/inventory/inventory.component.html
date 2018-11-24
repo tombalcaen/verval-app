@@ -1,11 +1,11 @@
 <!--<div class="container" style="padding: 0; margin: 0;">-->
-  <mat-tab-group mat-stretch-tabs (selectedTabChange)="resetRemove()" class="">    
+  <mat-tab-group mat-stretch-tabs (selectedTabChange)="resetRemove()" class="" style="height: 100vh;">    
     <mat-tab label="expired">
       <ng-template mat-tab-label>
           <i class="material-icons" style="padding: 0px 5px;">sentiment_very_dissatisfied</i> 
           <!-- <span>Mijne frigo</span> -->
       </ng-template>
-      <div class="container" style="height: calc(100vh - 90px)">
+      <div class="container" style="z-index: 1;"> <!--height: calc(100vh - 90px)-->
         <ul class="row" style="list-style: none; padding: 0; margin-bottom: 0;">
           <li class="text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;"><div class="">Expired food</div></li>
           <li *ngIf="inventory.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
@@ -30,7 +30,7 @@
         <!-- <span>Toevoegen</span> -->
       </ng-template>
       <div class="row">    
-        <div class="col-12" style="height: calc(100vh - 90px)">
+        <div class="col-12" style=""> <!--height: calc(100vh - 90px)-->
           <div class="container">            
             <form class="row" [formGroup]="addForm" (ngSubmit)="createInventory(addForm.value)">
               <div class="col-12 text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;">
@@ -42,6 +42,7 @@
               <div class="col-12 form-group" style="margin-top: 20px;">
                 <mat-form-field style="width: 100%;">
                   <input type="text" formControlName="name" matInput placeholder="Naam">
+                  <mat-icon matSuffix routerLink='/scan'><i class="fas fa-barcode"></i></mat-icon>                  
                 </mat-form-field>          
               </div>
               <!--<div class="col-12 form-group">
@@ -70,9 +71,15 @@
           <i class="material-icons" style="padding: 0px 5px;">view_list</i>
           <!-- <span>Mijne frigo</span> -->
       </ng-template>
-      <div class="container" style="height: calc(100vh - 90px)">
+      <div class="container" style=""> <!--height: calc(100vh - 90px)-->
         <ul class="row" style="list-style: none; padding: 0; margin-bottom: 0;">
-            <li class="text-center" style="width: 100%; background-color: #e0e0e0; font-weight: 500; font-size: 1.2em;"><div class="">All food</div></li>
+            <li class="text-center" style="width: 100%; font-weight: 500; font-size: 1.2em;">              
+              <mat-form-field style="width: 100%; padding: 0px 15px 0px 25px;">
+                <mat-select>
+                  <mat-option *ngFor="let food of foods" [value]="food.value">{{food.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>                 
+            </li>
           <li *ngIf="inventory.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
             <div class="">Er zit niks meer in uwe frigo</div>
           </li>
