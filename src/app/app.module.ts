@@ -33,6 +33,7 @@ import { ItemComponent } from './item/item.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScanComponent } from './scan/scan.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -51,7 +52,8 @@ export function tokenGetter() {
     StoryComponent,
     ItemComponent,
     ScanComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,

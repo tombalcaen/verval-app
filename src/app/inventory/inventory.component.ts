@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import { InventoryService } from '../service/inventory.service';
 
 import * as moment from 'moment/moment';
+import { ItemComponent } from '../item/item.component';
 
 @Component({
   selector: 'inventory',
@@ -129,6 +130,10 @@ export class InventoryComponent implements OnInit {
 
   getColor(expired_date){
     if(moment().diff(moment(expired_date), 'day') >= 0) return 'alert-danger';
+  }
+
+  getExpiredAmount(expired_date){
+    
   }
 
 }

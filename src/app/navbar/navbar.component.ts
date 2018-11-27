@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../service/auth.service';
 
@@ -9,9 +9,11 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() activeRouter = new EventEmitter();
 
   constructor(private _auth: AuthService,
-              private _router: Router) { }
+              private _router: Router,
+              private _activatedRouteSnap: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -20,5 +22,4 @@ export class NavbarComponent implements OnInit {
     this._auth.logout();
     this._router.navigate(['/welcome']);
   }
-
 }

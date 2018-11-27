@@ -23,6 +23,9 @@ export class AppComponent {
     }
   }
 
+  addItem($event){
+    console.log('activated route: ' + $event)
+  }
 
 
 }

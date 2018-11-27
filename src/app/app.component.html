@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-5">
         <router-outlet></router-outlet>
-        <navbar style="z-index: 1;"></navbar>        
+        <navbar (activeRouter)="addItem($event)" style="z-index: 1;"></navbar>        
       </div>
     </div>
   </div>    

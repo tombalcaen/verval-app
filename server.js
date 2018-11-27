@@ -6,12 +6,14 @@ const passport = require('passport');
 var db;
 const users = require('./routes/users');
 const inventory = require('./routes/inventory');
+const basket = require('./routes/groceryList');
+
 const config = require('./config/database');
 
 const app = express();
 
 //mongodb middleware
-mongoose.connect(config.mlab_uri, {useNewUrlParser: true});
+mongoose.connect(config.uri, {useNewUrlParser: true});
 
 mongoose.connection.on('connected',()=>{
   console.log("Database connection ready");
@@ -47,8 +49,7 @@ app.use(express.static(distDir));
 //routes middelware
 app.use('/users', users);
 app.use('/inventory', inventory);
-
-console.log(process.env.MONGODB_MLABURI)
+app.use('/basket', basket);
 
 var server = app.listen(process.env.PORT || 3000,()=>{
     console.log("App now running on port", server.address().port);

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { CommonModule } from '@angular/common';
 
 import { InventoryComponent } from './inventory/inventory.component';
+import { AddItemComponent } from './add-item/add-item.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'welcome',  component: FrontpageComponent },
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthService] },
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },
+  { path: 'add',  component: AddItemComponent, canActivate: [AuthService] },
   { path: 'story',  component: StoryComponent, canActivate: [AuthService] },
   { path: 'scan',  component: ScanComponent, canActivate: [AuthService] },
   { path: 'shopping-cart',  component: ShoppingCartComponent, canActivate: [AuthService] },

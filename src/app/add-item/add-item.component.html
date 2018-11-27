@@ -1,0 +1,38 @@
+<div class="row" style="margin: 0;">    
+  <div class="col-12 text-center" style="width: 100%; background-color: #78ff78bd; color: white; padding: 11px; font-weight: 700; font-size: 1.2em;">
+    <span style="float: left;"><a (click)="cancel();">Cancel</a></span>
+    <span>Add item</span>
+    <span style="float: right;"><a (click)="done();">Done</a></span>
+  </div>
+  <div class="col-12" style=""> <!--height: calc(100vh - 90px)-->
+    <div class="container">
+      <form class="row" [formGroup]="addForm" (ngSubmit)="createInventory(addForm.value)">        
+        <!-- <div>
+          <button class="btn btn-info" routerLink="/scan" style="width: 100%;">scan</button>
+        </div> -->
+        <div class="col-12 form-group" style="margin-top: 20px;">
+          <mat-form-field style="width: 100%;">
+            <input type="text" formControlName="name" matInput placeholder="Naam">
+            <mat-icon matSuffix routerLink='/scan'><i class="fas fa-barcode"></i></mat-icon>                  
+          </mat-form-field>          
+        </div>
+        <!--<div class="col-12 form-group">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <input formControlName="amount" matInput placeholder="Aantal">
+          </mat-form-field>                              
+        </div>-->
+        <div class="col-12 form-group">
+          <mat-form-field class="example-full-width" style="width: 100%;">
+            <input formControlName="expiration_date" matInput [matDatepicker]="picker" placeholder="Verval datum">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>          
+        </div>
+        <div class="col-12 form-group">
+          <button type="submit" class="btn btn-success text-light" style="width: 100%;">Add</button><!--<i class="material-icons">add_box</i> -->
+        </div>
+      </form>
+    </div>
+    <!-- <zxing-scanner></zxing-scanner> -->
+  </div>  
+</div>
