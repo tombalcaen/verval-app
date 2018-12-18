@@ -1,3 +1,46 @@
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;     
+    transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+.backgrounds{
+    overflow: hidden;
+    height: inherit;
+}
+
+.background{  
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;     
+    transition: all 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    padding: 0;
+    margin: 0;
+}
+
+.show{
+   
+}
+
+.hide{
+    /* width: 0vw;     */
+    display: none;    
+}
+
 .item-name{
     display: inline-block; 
     min-width: 100px;
@@ -18,3 +61,23 @@
 li{
     height: fit-content;
 }
+
+li:nth-child(0) {
+    background: red;
+  }
+
+li:nth-child(1) {
+    background: #42d692;
+  }
+  
+  li:nth-child(2) {
+    background: #4986e7;
+  }
+  
+  li:nth-child(3) {
+    background: #d06b64;
+  }
+  
+  li:nth-child(4) {
+    background: #42d692;
+  } 

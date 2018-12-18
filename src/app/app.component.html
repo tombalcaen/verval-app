@@ -1,10 +1,18 @@
 <!--<div class="container-fluid" style="padding: 0;">-->
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-5">
+  <!-- <div (swipeleft)="swLeft($event)" (swipeRight)="swRight($event)" class="backgrouds">
+    <div class="background show" style="background-color: #42d692;"></div>
+    <div class="background hide" style="background-color: #4986e7;"></div>
+    <div class="background hide" style="background-color: #d06b64;"></div>
+    <div class="background hide" style="background-color: #42d692;"></div>
+    <div class="background hide" style="background-color: #4986e7;"></div>
+  </div> -->
+
+  <!-- <div class="container-fluid"> -->
+    <!-- <div class="row justify-content-center">
+      <div class="col-12 col-md-5"> -->
         <router-outlet></router-outlet>
-        <navbar (activeRouter)="addItem($event)" style="z-index: 1;"></navbar>        
-      </div>
-    </div>
-  </div>    
+        <navbar *ngIf="blnShowNav" (activeRouter)="addItem($event)"></navbar>
+      <!-- </div>
+    </div> -->
+  <!-- </div>     -->
 <!--</div>-->

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http'
 import 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -12,6 +12,8 @@ import { environment } from "../../environments/environment";
 export class AuthService implements CanActivate{
   authToken: any;
   user: any;
+
+  activateNav: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _http: HttpClient,
               public jwtHelper: JwtHelperService,
@@ -53,6 +55,10 @@ export class AuthService implements CanActivate{
     localStorage.setItem("user",JSON.stringify(user));
     this.authToken = token;
     this.user = user;
+  }
+
+  activateNavbar(blnActivate){
+    this.activateNav.emit(blnActivate);
   }
 
   loggedIn(){    

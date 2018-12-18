@@ -1,4 +1,45 @@
-<div class="container-fluid" style="padding: 0">
+<div class="container-fluid">
+  <ul class="backgrounds" (swipeleft)="swLeft($event,i)" (swipeRight)="swRight($event, i)">
+    <li *ngFor="let pane of panes; let i = index" [class.hide]="i != active" class="container">
+      <div class="row" style="margin: 0">
+        <div class="col-12" style="padding: 0;">
+          <div class="text-center" style="padding: 20px; background-color: #78ff78bd">
+            <h1 style="border: 1px solid white; border-radius: 10px; margin: 0; padding: 10px; background: white; color: darkgrey;">name {{i}}</h1>            
+          </div>
+          <div>
+            <ul style="list-style: none; padding: 0; margin: 10px; overflow-y: scroll">
+              <li style="display: inline-block;">25 November</li>
+              <li style="display: inline-block; color: grey; float: right;">
+                <span style="padding: 0px 10px;">{{expired.length}}</span>
+                <span style="padding: 0px 10px; color: red;">2</span>
+                <span style="padding: 0px 10px; color: yellow">1</span>
+              </li>              
+            </ul>           
+          </div>
+        </div>
+      </div>
+    </li>
+    <li [class.hide]="active != panes.length" class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center" style="background-color: #78ff78bd; border: 1px solid white; margin: 0; color: darkgrey;">
+            <div style="padding: 20px; min-height: 150px; margin: 20px; background-color: white; border-radius: 10px;">
+              <h1 style="font-size: 20px; font-weight: 300;">Add list</h1>
+              <div><i class="fas fa-plus fa-3x"></i></div>
+            </div>             
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- <li class="background hide" style="background-color: #4986e7;"></li>
+    <li class="background hide" style="background-color: #d06b64;"></li>
+    <li class="background hide" style="background-color: #42d692;"></li>
+    <li class="background hide" style="background-color: #4986e7;"></li> -->
+  </ul>
+</div>
+
+<!-- VERSION 2 -->
+<!-- <div class="container-fluid" (swipeleft)="left($event)" style="padding: 0; background-color: blueviolet">
   <div class="row" style="margin: 0;">
     <div class="col-12" style="padding: 0;">
       <div class="text-center" style="padding: 20px; background-color: #78ff78bd"><h1 style="border: 1px solid white; border-radius: 10px; margin: 0; padding: 10px; background: white; color: darkgrey;">Expiration list</h1></div>
@@ -22,8 +63,8 @@
           <div>
             <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemoveExpired()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
             <span class="item-name">{{item.name}}</span>
-            <span style="float: right; vertical-align: sub; max-width: 100px;">{{item.expired_since}}</span>
-            <!--<span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>-->
+            <span style="float: right; vertical-align: sub; max-width: 100px;">{{item.expired_since}}</span> <span style="float: right; padding-right: 10px; vertical-align: sub; padding: 5px;">{{item.amount}}</span>
+            
           </div>
         </li>
         <li><div style="height: 40px; width: 100vw;"></div></li>
@@ -33,8 +74,10 @@
       <a style="font-size: 30px; line-height: normal; vertical-align: text-top; color: white; font-weight: 600;">+</a>
     </div>
   </div>
-</div>
+</div> -->
 
+
+<!-- VERSION 1 -->
   <!-- <mat-tab-group mat-stretch-tabs (selectedTabChange)="resetRemove()" class="" style="height: 100vh;">    
     <mat-tab label="expired">
       <ng-template mat-tab-label>

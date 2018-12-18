@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import { InventoryService } from '../service/inventory.service';
-
+import { AuthService } from '../service/auth.service';
 import * as moment from 'moment/moment';
 import { ItemComponent } from '../item/item.component';
 
@@ -14,15 +14,20 @@ import { ItemComponent } from '../item/item.component';
 export class InventoryComponent implements OnInit {
   addForm : FormGroup;
 
-  constructor(private _inventory: InventoryService,
+  constructor(private _auth: AuthService,
+              private _inventory: InventoryService,
               private fb: FormBuilder,
               public snackBar: MatSnackBar) {
+      this._auth.activateNavbar(true);
       this.createNewItemFormGroup();
    }
 
   expired = [];
   inventory = [];
   foods = [{name: "all food", value: 0},{name: "frigo", value: 0},{name: "kelder", value: 0}]
+
+  panes = [0,1,2,3]
+  active: number = 4;
 
   options = {
     gender : ['a','b','c']
@@ -62,6 +67,30 @@ export class InventoryComponent implements OnInit {
       })
       this.inventory = data;      
     }); 
+  }
+
+  swLeft($event,index){            
+    
+    if(this.panes.length > this.active ) ++this.active;
+    console.log(this.panes.length + " " + this.active)
+    // if($event.target.nextSibling != null){      
+    //   $event.target.classList.remove('show');
+    //   $event.target.classList.add('hide');      
+    //   $event.target.nextSibling.classList.remove('hide');
+    //   $event.target.nextSibling.classList.add('show');
+    // }
+  }
+
+  swRight($event,index){
+    if(this.active > 0) this.active--;
+    console.log(this.panes.length + " " + this.active)
+
+    // if($event.target.previousSibling != null){     
+    //   $event.target.classList.remove('show');
+    //   $event.target.classList.add('hide');
+    //   $event.target.previousSibling.classList.remove('hide');
+    //   $event.target.previousSibling.classList.add('show');
+    // }    
   }
 
   createInventory(formData){
@@ -134,6 +163,14 @@ export class InventoryComponent implements OnInit {
 
   getExpiredAmount(expired_date){
     
+  }
+
+  left(){
+    console.log("swipe left")
+  }
+
+  right(){
+    console.log("swipe right")
   }
 
 }
