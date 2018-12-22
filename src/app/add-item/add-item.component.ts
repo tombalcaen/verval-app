@@ -47,7 +47,7 @@ export class AddItemComponent implements OnInit {
       expiration_date: formData.expiration_date
     }
     
-    this._inventory.createInventory(createData).then((data)=>{      
+    this._inventory.createInventory(createData).then((data)=>{ 
       this.snackBar.open("Added item: " + formData.name, "OK" , {duration: 3000})
       //this.getInventory();
       this.addForm.reset();      

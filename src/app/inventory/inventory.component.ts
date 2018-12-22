@@ -24,12 +24,10 @@ export class InventoryComponent implements OnInit {
       this.createAddListForm();
    }
 
-  expired = [];
-  inventory = [];
+  expired = []; //used in previous version for expired food
+  inventory = []; //inventory of certain list
 
   list = [];
-
-  foods = [{name: "all food", value: 0},{name: "frigo", value: 0},{name: "kelder", value: 0}]
 
   panes = []
   active: number = 0;
@@ -57,34 +55,42 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit() {    
-    this.getList();        
+    this.getList();
   }
 
   getInventory(){  
     this.expired = [];
     this.inventory = []; 
     
-    this._inventory.getInventory(this.panes[this.active]).subscribe((data)=>{
-      data.map((d)=>{
-        if(moment().add(5,'days').isSameOrAfter(moment(d.expiration_date))){
-          this.expired.push({
-            checked : false,
-            name: d.name,
-            expired_since: moment(d.expiration_date).fromNow(),
-            expired_date: d.expiration_date
+    if(this.panes[this.active]){
+      let listUid = this.panes[this.active].id
+      this._inventory.getInventory(listUid).subscribe((data)=>{
+        data.map((d)=>{
+          this.inventory.push({
+            checked: false,
+            name: d.name
           })
-        }
-        d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
-        d.checked = false;
-      })
-      this.inventory = data;      
-    }); 
+  
+          // if(moment().add(5,'days').isSameOrAfter(moment(d.expiration_date))){
+          //   this.expired.push({
+          //     checked : false,
+          //     name: d.name,
+          //     expired_since: moment(d.expiration_date).fromNow(),
+          //     expired_date: d.expiration_date
+          //   })
+          // }
+          // d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
+          d.checked = false;
+        })
+        this.inventory = data;      
+      }); 
+    }
   }
 
   getList(){    
     this.list = [];
     this.panes = [];
-    return this._inventory.getList().subscribe((data)=>{ 
+    this._inventory.getList().subscribe((data)=>{ 
       data.map((d)=>{        
         this.panes.push({id: d._id, name: d.name})
         this.getInventory();
@@ -100,17 +106,15 @@ export class InventoryComponent implements OnInit {
     
     this._inventory.createList(createData).then((data)=>{      
       this.snackBar.open("Added item: " + createData.name, "OK" , {duration: 3000});      
+      this.getList();
+      this.active = this.panes.length;
+      this.addListForm.reset();
     })
   }
 
-  addItem(pane){
-    console.log(pane)
-  }
-
   swLeft($event,index){            
-    
     if(this.panes.length > this.active ) ++this.active;
-    console.log(this.panes.length + " " + this.active)
+    this.getInventory();
     // if($event.target.nextSibling != null){      
     //   $event.target.classList.remove('show');
     //   $event.target.classList.add('hide');      
@@ -120,9 +124,8 @@ export class InventoryComponent implements OnInit {
   }
 
   swRight($event,index){
-    if(this.active > 0) this.active--;
-    console.log(this.panes.length + " " + this.active)
-
+    if(this.active > 0) this.active--; 
+    this.getInventory();
     // if($event.target.previousSibling != null){     
     //   $event.target.classList.remove('show');
     //   $event.target.classList.add('hide');
@@ -163,6 +166,11 @@ export class InventoryComponent implements OnInit {
     this._inventory.deleteItem(id).then((data)=>{      
       this.getInventory();
     })
+  }
+
+  jumpPane(i){    
+    this.active = i;
+    this.getInventory();
   }
 
   addRemove(){

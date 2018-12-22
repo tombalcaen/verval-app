@@ -23,11 +23,12 @@ export class InventoryService {
   constructor(private _http: HttpClient,
               private _auth: AuthService) { }
 
-  getInventory(activeList): Observable<any>{
-    var uid = JSON.parse(localStorage.getItem('user')).id
-    console.log("activeList")
-    console.log(activeList)
-    return this._http.get(environment.connection_uri + 'inventory/?uid=' + uid);
+  getInventory(listUid): Observable<any>{
+
+    console.log('listUid: ' + listUid)
+
+    var uid = JSON.parse(localStorage.getItem('user')).id    
+    return this._http.get(environment.connection_uri + 'inventory/?listId=' + listUid);
   }
 
   createInventory(newItem): Promise<void | Item>{    

@@ -3,7 +3,7 @@ const router = express.Router();
 const Inventory = require("../models/inventory");
 
 router.get('/',(req,res,next)=>{    
-    Inventory.getInventory(req.query.uid,(err, items)=>{        
+    Inventory.getInventory(req.query.listId,(err, items)=>{        
     if(err){
         res.json({success: false, message: "failed to register user."})
       } else {

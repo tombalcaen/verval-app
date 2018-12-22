@@ -12,8 +12,8 @@ const inventorySchema = mongoose.Schema({
 
 const Inventory = module.exports = mongoose.model('inventory', inventorySchema);
 
-module.exports.getInventory = function(uid,callback){    
-    Inventory.find({uid: uid},callback)
+module.exports.getInventory = function(listId,callback){    
+    Inventory.find({listId: listId},callback)
 }
 
 module.exports.addItem = function(item,callback){    
