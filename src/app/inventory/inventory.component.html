@@ -67,7 +67,7 @@
           <div class="text-center" style="background-color: #78ff78bd; border: 1px solid white; margin: 0; color: darkgrey;">
             <div style="position: relative; padding: 20px; margin: 20px; background-color: white; border-radius: 10px;">
               <form class="row" [formGroup]="addListForm" (ngSubmit)="createList(addListForm.value)">
-                <mat-form-field [floatLabel]="never" style="width: 100%; text-align: center; font-size: 30px;">
+                <mat-form-field style="width: 100%; text-align: center; font-size: 30px;">
                   <input formControlName="name" matInput placeholder="Add new list" type="text">                  
                   <button type="submit" class="sub-but text-light" style="position: absolute; right: 0; bottom: 0;"><i class="material-icons">add_box</i></button>
                 </mat-form-field>                
