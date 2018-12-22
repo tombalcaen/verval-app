@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <ul class="backgrounds" (swipeleft)="swLeft($event,i)" (swipeRight)="swRight($event, i)">
+  <ul class="backgrounds" (swipeleft)="swLeft($event)" (swipeRight)="swRight($event)">
     <li *ngFor="let pane of panes; let i = index" [class.hide]="i != active" class="container">
       <div class="row" style="margin: 0">
         <div class="col-12" style="padding: 0;">

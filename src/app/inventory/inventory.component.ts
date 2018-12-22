@@ -112,7 +112,7 @@ export class InventoryComponent implements OnInit {
     })
   }
 
-  swLeft($event,index){            
+  swLeft(event){            
     if(this.panes.length > this.active ) ++this.active;
     this.getInventory();
     // if($event.target.nextSibling != null){      
@@ -123,7 +123,7 @@ export class InventoryComponent implements OnInit {
     // }
   }
 
-  swRight($event,index){
+  swRight($event){
     if(this.active > 0) this.active--; 
     this.getInventory();
     // if($event.target.previousSibling != null){     
