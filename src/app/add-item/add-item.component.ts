@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
@@ -13,6 +14,7 @@ export class AddItemComponent implements OnInit {
   addForm : FormGroup;
 
   constructor(private fb: FormBuilder,
+              private _route: ActivatedRoute,
               private _inventory: InventoryService,
               private _location: Location,
               public snackBar: MatSnackBar,
@@ -20,7 +22,12 @@ export class AddItemComponent implements OnInit {
     this.createNewItemFormGroup();
   }
 
+  listUid: any;
+
   ngOnInit() {
+    this._route.queryParams.subscribe((p)=>{
+      this.listUid = p.id;
+    })
   }
 
   createNewItemFormGroup(){
@@ -34,6 +41,7 @@ export class AddItemComponent implements OnInit {
   createInventory(formData){
     var createData = {
       uid: JSON.parse(localStorage.getItem('user')).id,
+      listId: this.listUid,
       name: formData.name,
       amount: formData.amount,
       expiration_date: formData.expiration_date

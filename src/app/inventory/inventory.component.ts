@@ -13,6 +13,7 @@ import { ItemComponent } from '../item/item.component';
 })
 export class InventoryComponent implements OnInit {
   addForm : FormGroup;
+  addListForm : FormGroup;
 
   constructor(private _auth: AuthService,
               private _inventory: InventoryService,
@@ -20,14 +21,18 @@ export class InventoryComponent implements OnInit {
               public snackBar: MatSnackBar) {
       this._auth.activateNavbar(true);
       this.createNewItemFormGroup();
+      this.createAddListForm();
    }
 
   expired = [];
   inventory = [];
+
+  list = [];
+
   foods = [{name: "all food", value: 0},{name: "frigo", value: 0},{name: "kelder", value: 0}]
 
-  panes = [0,1,2,3]
-  active: number = 4;
+  panes = []
+  active: number = 0;
 
   options = {
     gender : ['a','b','c']
@@ -45,14 +50,21 @@ export class InventoryComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.getInventory();
+  createAddListForm(){
+    this.addListForm = this.fb.group({
+      name: ['']
+    })
+  }
+
+  ngOnInit() {    
+    this.getList();        
   }
 
   getInventory(){  
     this.expired = [];
     this.inventory = []; 
-    this._inventory.getInventory().subscribe((data)=>{
+    
+    this._inventory.getInventory(this.panes[this.active]).subscribe((data)=>{
       data.map((d)=>{
         if(moment().add(5,'days').isSameOrAfter(moment(d.expiration_date))){
           this.expired.push({
@@ -67,6 +79,32 @@ export class InventoryComponent implements OnInit {
       })
       this.inventory = data;      
     }); 
+  }
+
+  getList(){    
+    this.list = [];
+    this.panes = [];
+    return this._inventory.getList().subscribe((data)=>{ 
+      data.map((d)=>{        
+        this.panes.push({id: d._id, name: d.name})
+        this.getInventory();
+      })
+    })
+  }
+
+  createList(listData){
+    var createData = {
+      uid: JSON.parse(localStorage.getItem('user')).id,
+      name: listData.name      
+    }
+    
+    this._inventory.createList(createData).then((data)=>{      
+      this.snackBar.open("Added item: " + createData.name, "OK" , {duration: 3000});      
+    })
+  }
+
+  addItem(pane){
+    console.log(pane)
   }
 
   swLeft($event,index){            

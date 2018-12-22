@@ -7,6 +7,7 @@ var db;
 const users = require('./routes/users');
 const inventory = require('./routes/inventory');
 const basket = require('./routes/groceryList');
+const list = require('./routes/list');
 
 const config = require('./config/database');
 
@@ -50,6 +51,7 @@ app.use(express.static(distDir));
 app.use('/users', users);
 app.use('/inventory', inventory);
 app.use('/basket', basket);
+app.use('/list', list);
 
 var server = app.listen(process.env.PORT || 3000,()=>{
     console.log("App now running on port", server.address().port);

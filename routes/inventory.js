@@ -15,6 +15,7 @@ router.get('/',(req,res,next)=>{
 router.post('/',(req,res,next)=>{       
     let newItem = new Inventory({
         uid: req.body.uid,
+        listId: req.body.listId,
         name: req.body.name,
         amount: req.body.amount,
         expiration_date: req.body.expiration_date

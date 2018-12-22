@@ -23,8 +23,10 @@ export class InventoryService {
   constructor(private _http: HttpClient,
               private _auth: AuthService) { }
 
-  getInventory(): Observable<any>{
+  getInventory(activeList): Observable<any>{
     var uid = JSON.parse(localStorage.getItem('user')).id
+    console.log("activeList")
+    console.log(activeList)
     return this._http.get(environment.connection_uri + 'inventory/?uid=' + uid);
   }
 
@@ -67,6 +69,22 @@ export class InventoryService {
                 .toPromise()
                 .then(response => response as BasketItem)
                 .catch(this.handleError);    
+  }
+
+  getList(): Observable<any>{    
+    var uid = JSON.parse(localStorage.getItem('user')).id
+    return this._http.get(environment.connection_uri + 'list/?uid=' + uid);
+  }
+
+  createList(newList){
+    return this._http.post(environment.connection_uri + 'list/', newList)
+    .toPromise()
+    .then(response => response as Item)
+    .catch(this.handleError);    
+  }
+
+  deleteList(){
+
   }
 
   private handleError (error: any) {
