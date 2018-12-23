@@ -1,22 +1,24 @@
 <div class="container-fluid">
   <ul class="backgrounds" (swipeleft)="swLeft($event)" (swipeRight)="swRight($event)">
-    <li *ngFor="let pane of panes; let i = index" [class.hide]="i != active" class="container">
+    <li *ngFor="let pane of panes; let i = index" class="container-fluid" [class.hide]="i != active">
       <div class="row" style="margin: 0">
         <div class="col-12" style="padding: 0;">
-          <div class="text-center" style="padding: 20px; background-color: #78ff78bd">
+          <div class="text-center" style="padding: 20px; background: linear-gradient(-90deg,#52e2ab,#56d4da)">
             <h1 style="border: 1px solid white; border-radius: 10px; margin: 0; padding: 10px; background: white; color: darkgrey;">{{pane.name}}</h1>            
           </div>          
-          <div class="text-center" style=" background-color: #78ff78bd">
-            <ul style="padding-bottom: 15px; margin: 0;">
-              <li class="" *ngFor="let a of panes; let i = index;" (click)="jumpPane(i)" style="display: inline; padding: 0; margin: 0;">
-                <i [class.bol--active]="i == active" class="fas fa-circle bol" style="margin: 0px 10px; color: white; font-size: 10px;"></i>
+          <div class="text-center" style=" background: linear-gradient(-90deg,#52e2ab,#56d4da)">
+            <ul style="margin-top: -1px; padding-bottom: 15px;">
+              <li class="" *ngFor="let a of panes; let i = index; last as l" style="display: inline; padding: 0; margin: 0;">
+                <i (click)="jumpPane(i)" [class.bol--active]="i == active" class="fas fa-circle bol" style="margin: 0px 10px; color: white; font-size: 10px;"></i>
+                <i *ngIf="l" class="fas fa-plus bol" (click)="jumpPane(i + 1)" style="margin: 0px 10px; color: white; font-size: 10px;"></i>
               </li>
             </ul>            
           </div>
           <div>
-            <ul style="list-style: none; padding: 0; margin: 10px; overflow-y: scroll">
+            <ul style="list-style: none; padding: 0; margin: 10px;">
               <li style="display: inline-block;">25 November</li>
               <li style="display: inline-block; color: grey; float: right;">
+                <span style="padding: 0px 10px;">{{totalSel}}</span>                 
                 <span style="padding: 0px 10px;">{{inventory.length}}</span> 
               </li>              
             </ul>           
@@ -25,14 +27,14 @@
       </div>
 
       <div class="row" style="padding: 0">
-        <div class="col-12">
+        <div class="col-12" style="height: calc(100vh - 235px); overflow-y: scroll; touch-action: pan-y;">
           <ul>
             <li *ngIf="inventory.length <= 0" class="col-12 text-center" style="padding: 10px 0px;">
               <div class="">Er is niks</div>
             </li>
             <li *ngFor="let item of inventory;">
                 <div>
-                  <mat-checkbox class="example-margin" [(ngModel)]="item.checked"  (ngModelChange)="addRemoveExpired()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
+                  <mat-checkbox class="example-margin" [(ngModel)]="item.checked" (ngModelChange)="addRemove()" style="padding-left: 10px; padding-right: 10px; vertical-align: -webkit-baseline-middle;"></mat-checkbox>
                   <span class="item-name">{{item.name}}</span>                 
                 </div>  
             </li>
@@ -41,7 +43,7 @@
       </div>
 
       <!--create button-->
-      <div class="text-center" routerLink="/add" [queryParams]="pane" style="position: absolute; left: calc(50% - 25px); bottom: 17px; height: 50px; width: 50px; border: 1px solid #78ff78bd; border-radius: 50%; background: #78ff78bd; z-index: 400;">
+      <div class="text-center" routerLink="/add" [queryParams]="pane" style="position: absolute; left: calc(50% - 25px); bottom: 17px; height: 50px; width: 50px; border: 1px solid #78ff78bd; border-radius: 50%; background: linear-gradient(-90deg,#52e2ab,#56d4da); z-index: 400;">
         <a style="font-size: 30px; line-height: normal; vertical-align: text-top; color: white; font-weight: 600;">+</a>
       </div>  
       <!-- <div style="height: calc(100vh - 196px); overflow-y: scroll;">
@@ -61,28 +63,58 @@
         </ul> 
       </div> -->
     </li>
-    <li [class.hide]="active != panes.length" class="container">
+    <li [class.hide]="active != panes.length" class="container-fluid">
       <div class="row" style="height: inherit;">
-        <div class="col-12">
-          <div class="text-center" style="background-color: #78ff78bd; border: 1px solid white; margin: 0; color: darkgrey;">
-            <div style="position: relative; padding: 20px; margin: 20px; background-color: white; border-radius: 10px;">
+        <div class="col-12" style="height: 0;">
+          <div class="text-center" style="background: linear-gradient(-90deg,#52e2ab,#56d4da); padding: 20px 20px; margin: 0; color: darkgrey;">
+            <div style="position: relative; padding: 6px 0px 5px 0px; background-color: white; border-radius: 10px;">
               <form class="row" [formGroup]="addListForm" (ngSubmit)="createList(addListForm.value)">
-                <mat-form-field style="width: 100%; text-align: center; font-size: 30px;">
-                  <input formControlName="name" matInput placeholder="Add new list" type="text">                  
-                  <button type="submit" class="sub-but text-light" style="position: absolute; right: 0; bottom: 0;"><i class="material-icons">add_box</i></button>
+                <mat-form-field floatLabel="never" style="width: 100%; text-align: center; font-size: 30px;">
+                  <input formControlName="name" matInput placeholder="Type here to add" type="text">                  
+                  <button type="submit" class="sub-but text-light" style="display: none;"><i class="material-icons">add_box</i></button>
                 </mat-form-field>                
               </form>         
             </div>             
           </div>
+
+          <div class="text-center" style="background: linear-gradient(-90deg,#52e2ab,#56d4da)">
+            <ul style="padding-bottom: 15px; margin: 0;">
+              <li class="" *ngFor="let a of panes; let i = index; last as l" (click)="jumpPane(i)" style="display: inline; padding: 0; margin: 0;">
+                <i class="fas fa-circle bol" style="margin: 0px 10px; color: white; font-size: 10px;"></i>
+                <i *ngIf="l" class="fas fa-plus bol" [class.bol--active]="l" style="margin: 0px 10px; color: white; font-size: 10px;"></i>
+              </li>
+            </ul>            
+          </div>
+          
         </div>
         <div class="col-12 text-center">
           <div>
+            <p>/\</p>
+            <p>|</p>
+            <p>|</p>
+            <p>|</p>
+            <h4>Create new list</h4>
             <h6>Type and press enter</h6>
           </div>
         </div>
       </div>
     </li>
   </ul>
+</div>
+
+
+<!-- *ngIf="blnDelete" -->
+<div class="control item-delete" [class.item-delete--show]="totalSel > 0" style="position: absolute; right: 0; top: 12em; padding: 5px; z-index: 5;">      
+  <div style="margin: 5px;">
+    <button class="" style="width: 50px; height: 50px; background: linear-gradient(-90deg,#52e2ab,#56d4da); box-shadow: 0 6px 10px 0 rgba(0,0,0,.16); mix-blend-mode: lighten; border-radius: 50%;" (click)="deleteInventory()">
+      <i class="fas fa-trash-alt" style="color: white;"></i>
+    </button>    
+  </div>
+  <div style="margin: 5px;">
+    <button style="width: 50px; height: 50px; background: linear-gradient(-90deg,#52e2ab,#56d4da); box-shadow: 0 6px 10px 0 rgba(0,0,0,.16); mix-blend-mode: lighten; border-radius: 50%;">
+      <i class="fas fa-exchange-alt" style="color: white;"></i>
+    </button>    
+  </div>
 </div>
 
 <!-- VERSION 2 -->

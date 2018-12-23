@@ -84,7 +84,8 @@ export function tokenGetter() {
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [JwtHelperService,AuthService],
+  providers: [JwtHelperService,
+              AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,12 +31,14 @@ export class InventoryComponent implements OnInit {
 
   panes = []
   active: number = 0;
+  totalSel: number = 0;
 
   options = {
     gender : ['a','b','c']
   }
 
   test = "null";
+  
 
   blnDelete : boolean = false;
 
@@ -59,17 +61,19 @@ export class InventoryComponent implements OnInit {
   }
 
   getInventory(){  
+    console.log("get inventory")
     this.expired = [];
     this.inventory = []; 
     
     if(this.panes[this.active]){
       let listUid = this.panes[this.active].id
-      this._inventory.getInventory(listUid).subscribe((data)=>{
-        data.map((d)=>{
-          this.inventory.push({
-            checked: false,
-            name: d.name
-          })
+      this._inventory.getInventory(listUid).subscribe((data)=>{ 
+          // this.inventory.push({
+          //   checked: false,
+          //   name: data.name
+          // })
+
+          this.inventory = data;
   
           // if(moment().add(5,'days').isSameOrAfter(moment(d.expiration_date))){
           //   this.expired.push({
@@ -80,9 +84,8 @@ export class InventoryComponent implements OnInit {
           //   })
           // }
           // d.expiration_date = moment(d.expiration_date).format('DD/MM/YYYY');
-          d.checked = false;
-        })
-        this.inventory = data;      
+
+              
       }); 
     }
   }
@@ -93,7 +96,7 @@ export class InventoryComponent implements OnInit {
     this._inventory.getList().subscribe((data)=>{ 
       data.map((d)=>{        
         this.panes.push({id: d._id, name: d.name})
-        this.getInventory();
+        if(this.panes.length <= 1) this.getInventory();
       })
     })
   }
@@ -112,26 +115,18 @@ export class InventoryComponent implements OnInit {
     })
   }
 
-  swLeft(event){            
+  swLeft(event){
+    console.log("swipe left")
     if(this.panes.length > this.active ) ++this.active;
-    this.getInventory();
-    // if($event.target.nextSibling != null){      
-    //   $event.target.classList.remove('show');
-    //   $event.target.classList.add('hide');      
-    //   $event.target.nextSibling.classList.remove('hide');
-    //   $event.target.nextSibling.classList.add('show');
-    // }
+    this.getInventory(); 
+    this.totalSel = 0;
   }
 
   swRight($event){
+    console.log("swipe right")
     if(this.active > 0) this.active--; 
-    this.getInventory();
-    // if($event.target.previousSibling != null){     
-    //   $event.target.classList.remove('show');
-    //   $event.target.classList.add('hide');
-    //   $event.target.previousSibling.classList.remove('hide');
-    //   $event.target.previousSibling.classList.add('show');
-    // }    
+    this.getInventory(); 
+    this.totalSel = 0;
   }
 
   createInventory(formData){
@@ -169,21 +164,31 @@ export class InventoryComponent implements OnInit {
   }
 
   jumpPane(i){    
+    console.log(i)
     this.active = i;
     this.getInventory();
+    this.totalSel = 0;
+  }
+
+  totalSelected(){        
+    this.totalSel = this.inventory.filter((item)=>{      
+      return item["checked"] == true
+    }).length;    
   }
 
   addRemove(){
     this.blnDelete = this.inventory.some((a)=>{
      return a.checked == true;
     })
+
+    this.totalSelected();
   }
 
-  addRemoveExpired(){
-    this.blnDelete = this.expired.some((a)=>{
-      return a.checked == true;
-     })
-  }
+  // addRemoveExpired(){
+  //   this.blnDelete = this.expired.some((a)=>{
+  //     return a.checked == true;
+  //    })
+  // }
 
   resetRemove(){
     this.inventory.map((item)=>{
@@ -197,11 +202,11 @@ export class InventoryComponent implements OnInit {
     this.blnDelete = false;
   }
 
-  getExpired(){
-    this._inventory.getExpired().then((data)=>{
-      console.log(data)
-    })
-  }
+  // getExpired(){
+  //   this._inventory.getExpired().then((data)=>{
+  //     console.log(data)
+  //   })
+  // }
 
   getColor(expired_date){
     if(moment().diff(moment(expired_date), 'day') >= 0) return 'alert-danger';
@@ -210,13 +215,4 @@ export class InventoryComponent implements OnInit {
   getExpiredAmount(expired_date){
     
   }
-
-  left(){
-    console.log("swipe left")
-  }
-
-  right(){
-    console.log("swipe right")
-  }
-
 }
