@@ -41,6 +41,7 @@ export class InventoryComponent implements OnInit {
   
 
   blnDelete : boolean = false;
+  blnMove: boolean = false;
 
   createNewItemFormGroup(){
     this.addForm = this.fb.group({
@@ -120,6 +121,7 @@ export class InventoryComponent implements OnInit {
     if(this.panes.length > this.active ) ++this.active;
     this.getInventory(); 
     this.totalSel = 0;
+    this.blnMove = false;
   }
 
   swRight($event){
@@ -127,6 +129,7 @@ export class InventoryComponent implements OnInit {
     if(this.active > 0) this.active--; 
     this.getInventory(); 
     this.totalSel = 0;
+    this.blnMove = false;
   }
 
   createInventory(formData){
@@ -168,6 +171,7 @@ export class InventoryComponent implements OnInit {
     this.active = i;
     this.getInventory();
     this.totalSel = 0;
+    this.blnMove = false;
   }
 
   totalSelected(){        
@@ -207,6 +211,10 @@ export class InventoryComponent implements OnInit {
   //     console.log(data)
   //   })
   // }
+
+  toggleMove(){
+    this.blnMove?this.blnMove = false:this.blnMove = true;
+  }
 
   getColor(expired_date){
     if(moment().diff(moment(expired_date), 'day') >= 0) return 'alert-danger';

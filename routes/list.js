@@ -5,9 +5,6 @@ const List = require("../models/list");
 router.get('/',(req,res,next)=>{    
     List.getList(req.query.uid,(err, items)=>{        
 
-    console.log(err)
-    console.log(items)
-
     if(err){
         res.json({success: false, message: "failed to get lists."})
       } else {          
