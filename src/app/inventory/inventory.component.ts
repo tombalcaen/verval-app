@@ -61,8 +61,7 @@ export class InventoryComponent implements OnInit {
     this.getList();
   }
 
-  getInventory(){  
-    console.log("get inventory")
+  getInventory(){    
     this.expired = [];
     this.inventory = []; 
     

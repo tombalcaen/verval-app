@@ -1,8 +1,56 @@
-.add:hover{
-    border: 1px solid grey;
-    background-color: #e0e0e0;
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.row{
+    margin: 0;
+    padding: 0;
+}
+
+.col-12{
+    padding: 0;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    padding: 0;
+    margin: 0;
 }
 
 .strikethrough{
     text-decoration: line-through;
+}
+
+.generate-fav-button{
+    position: relative;
+    height: 42px;
+    border-radius: 3px;
+    box-shadow: 0 4px 6px 0 rgba(50,50,93,.11), 1px 1px 3px 0 rgba(0,0,0,.08);
+    transition: .2s;
+    font-weight: 700;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #222;
+    vertical-align: top;
+    text-decoration: none;
+    padding: 13px 24px 13px 25px;
+}
+
+.button-generate{
+    background-color: #fff;
+    color: #2c4267;
+    font-weight: 700;
+}
+
+::ng-deep .mat-checkbox-frame, ::ng-deep .mat-checkbox-background {
+    border-radius: 50% !important;
 }

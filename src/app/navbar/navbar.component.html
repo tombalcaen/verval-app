@@ -2,6 +2,14 @@
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark">
       <ul class="row">
+        <li routerLink='/favorites' class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
+          <a class="">
+            <div routerLink='/favorites'>
+              <span style="margin-right: 20px;"><i class="material-icons" style="vertical-align: middle;">star</i></span>
+              <span style="">My favorites</span>
+            </div>          
+          </a>
+        </li>
         <li routerLink='/story' class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
           <a class="">
             <div routerLink='/story'>
@@ -9,7 +17,7 @@
               <span style="">Feedback</span>
             </div>          
           </a>
-        </li>
+        </li>        
         <li class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
           <a class="" (click)="logout()">
             <div>

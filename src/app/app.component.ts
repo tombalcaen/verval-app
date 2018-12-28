@@ -29,18 +29,17 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this._auth.activateNav.subscribe((blnActiv)=>{
-      console.log("en? " + blnActiv)
+    this._auth.activateNav.subscribe((blnActiv)=>{      
       this.blnShowNav = blnActiv;
     }) 
   }
 
   addItem($event){
-    console.log('activated route: ' + $event)
+    
   }
 
   test(){
-    console.log("test")
+
   }
 
   swLeft($event){        

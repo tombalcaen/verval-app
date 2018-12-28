@@ -12,6 +12,7 @@ import { StoryComponent } from './story/story.component';
 import { AuthService } from './service/auth.service';
 import { ScanComponent } from './scan/scan.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'profile',  component: ProfileComponent, canActivate: [AuthService] },
   { path: 'add',  component: AddItemComponent, canActivate: [AuthService] },
   { path: 'story',  component: StoryComponent, canActivate: [AuthService] },
+  { path: 'favorites',  component: FavoritesComponent, canActivate: [AuthService] },
   { path: 'scan',  component: ScanComponent, canActivate: [AuthService] },
   { path: 'shopping-cart',  component: ShoppingCartComponent, canActivate: [AuthService] },
   { path: 'register',  component: RegisterComponent },

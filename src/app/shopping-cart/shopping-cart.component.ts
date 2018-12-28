@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { AuthService } from "../service/auth.service";
 import { InventoryService } from "../service/inventory.service";
 
 @Component({
@@ -12,7 +13,9 @@ export class ShoppingCartComponent implements OnInit {
   addForm: FormGroup;
 
   constructor(private fb: FormBuilder,
+              private _auth: AuthService,
               private _inventory: InventoryService) {
+    this._auth.activateNavbar(true);
     this.createAddForm();
    }
 
@@ -23,6 +26,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   basket = [];
+  totalSel: number = 0;
 
   ngOnInit() {
     this.initBasket();
@@ -52,7 +56,18 @@ export class ShoppingCartComponent implements OnInit {
     })
   }
 
+  deleteAll(){
+    this._inventory.deleteAllBasket().then((data)=>{
+
+    })
+  }
+
   RemoveBasketItems(){
     
   }
+  
+  generateFavorites(){
+    this._inventory.generateBasket();
+  }
+
 }

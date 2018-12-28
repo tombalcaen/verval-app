@@ -24,9 +24,6 @@ export class InventoryService {
               private _auth: AuthService) { }
 
   getInventory(listUid): Observable<any>{
-
-    console.log('listUid: ' + listUid)
-
     var uid = JSON.parse(localStorage.getItem('user')).id    
     return this._http.get(environment.connection_uri + 'inventory/?listId=' + listUid);
   }
@@ -72,6 +69,24 @@ export class InventoryService {
                 .catch(this.handleError);    
   }
 
+  generateBasket(): Promise<any>{    
+    var uid = JSON.parse(localStorage.getItem('user')).id
+    
+    return this._http.post(environment.connection_uri + 'basket/generate/', {'uid': uid})
+                        .toPromise()
+                        .then(response => response as BasketItem)
+                        .catch(this.handleError);    
+  }
+
+  deleteAllBasket(): Promise<any>{
+    var uid = JSON.parse(localStorage.getItem('user')).id
+
+    return this._http.post(environment.connection_uri + 'basket/deleteAll/', {'uid': uid})
+                        .toPromise()
+                        .then(response => response as BasketItem)
+                        .catch(this.handleError);    
+  }
+
   getList(): Observable<any>{    
     var uid = JSON.parse(localStorage.getItem('user')).id
     return this._http.get(environment.connection_uri + 'list/?uid=' + uid);
@@ -86,6 +101,25 @@ export class InventoryService {
 
   deleteList(){
 
+  }
+
+  getFavorites(uid): Observable<any>{
+    return this._http.get(environment.connection_uri + 'favorite/?uid=' + uid);
+  }
+  
+  createFavorite(newItem): Promise<void | Object>{
+    console.log(newItem)
+    return this._http.post(environment.connection_uri + 'favorite/', newItem)
+                .toPromise()
+                .then(response => response)
+                .catch(this.handleError);    
+  }
+
+  deleteFavorites(favoritesId){
+    return this._http.delete(environment.connection_uri + 'favorite/?items=' + favoritesId)
+                .toPromise()
+                .then(response => response as string)
+                .catch(this.handleError);
   }
 
   private handleError (error: any) {

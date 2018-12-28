@@ -15,7 +15,8 @@ import {MatCheckboxModule,
         MatIconModule,
         MatProgressBarModule,
         MatSnackBarModule,
-        MatSelectModule} from '@angular/material';
+        MatSelectModule,
+        MatSlideToggleModule} from '@angular/material';        
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './profile/profile.component';
@@ -34,6 +35,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScanComponent } from './scan/scan.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AddItemComponent } from './add-item/add-item.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -53,7 +55,8 @@ export function tokenGetter() {
     ItemComponent,
     ScanComponent,
     ShoppingCartComponent,
-    AddItemComponent
+    AddItemComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ export function tokenGetter() {
     MatProgressBarModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatSlideToggleModule,
     AppRoutingModule,
     HttpClientModule,
     ZXingScannerModule,

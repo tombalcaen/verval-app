@@ -34,6 +34,7 @@ export class AddItemComponent implements OnInit {
     this.addForm = this.fb.group({
       name: [''],
       amount: [''],
+      favorit: [''],
       expiration_date: ['']
     })
   }
@@ -46,11 +47,25 @@ export class AddItemComponent implements OnInit {
       amount: formData.amount,
       expiration_date: formData.expiration_date
     }
+
+    var favoriteItem = {
+      uid: JSON.parse(localStorage.getItem('user')).id,
+      listId: this.listUid,
+      name: formData.name
+    }
     
     this._inventory.createInventory(createData).then((data)=>{ 
       this.snackBar.open("Added item: " + formData.name, "OK" , {duration: 3000})
       //this.getInventory();
       this.addForm.reset();      
+    }).then(()=>{
+      console.log("22")
+      if(formData.favorit){
+        console.log("hierin????")
+        this._inventory.createFavorite(favoriteItem).then((data)=>{
+          console.log("saved as favorite!")
+        })
+      }
     })
   }
 

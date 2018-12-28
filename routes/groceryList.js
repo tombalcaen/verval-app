@@ -12,7 +12,7 @@ router.get('/',(req,res,next)=>{
     })
 })
 
-router.post('/',(req,res,next)=>{       
+router.post('/',(req,res,next)=>{   
     let newList = new GroceryList({
         uid: req.body.uid,
         name: req.body.name,        
@@ -40,5 +40,29 @@ router.delete('/',(req,res,next)=>{
         }
     })
 })
+
+router.post('/deleteAll',(req,res,next)=>{    
+    let uid = req.body.uid;
+
+    GroceryList.deleteAllForUid(uid,(err,Item)=>{ 
+        if(err){
+            res.json({success: false, message: "could not delete all."})
+        } else {
+            res.json({success: true, message: "List deleted!"})
+        }
+    })
+})
+
+router.post('/generate',(req,res,next)=>{
+    let uid = req.body.uid;
+
+    GroceryList.generateBasket(uid,(err,Item)=>{
+        if(err){            
+            res.json({success: false, message: "error when generating basket."})
+        } else {            
+            res.json({success: true, message: "basked generated!"})    
+        }            
+    })
+});
 
 module.exports = router;

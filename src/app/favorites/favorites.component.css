@@ -1,0 +1,37 @@
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    padding: 0;
+    margin: 0;
+}
+
+.item-name{
+    /* display: inline-block;  */
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+    vertical-align: sub;
+}
+
+.item-options{
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+}
+
+.item-options--show{
+    opacity: 1;
+}
+
+::ng-deep .mat-checkbox-frame, ::ng-deep .mat-checkbox-background {
+    border-radius: 50% !important;
+}

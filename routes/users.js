@@ -40,18 +40,14 @@ router.post('/register',(req,res,next)=>{
 //authenticate
 router.post('/authenticate',(req,res,next)=>{
     const username = req.body.username;
-    const password = req.body.password;
-
-    console.log(req.body)
+    const password = req.body.password;    
 
     User.getUserByUsername(username,(err,user)=>{
         if(err) throw(err);
         if(!user){
             return res.json({success: false, message: "user not found!"})
         }
-        
-        console.log(user)
-
+         
         User.comparePassword(password,user.password,(err,isMatch)=>{
           if(err) throw(err);
           if(isMatch){              
@@ -74,13 +70,11 @@ router.post('/authenticate',(req,res,next)=>{
 })
 
 //profile
-router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{    
-    console.log('ik zit in router profile')
+router.get('/profile', passport.authenticate('jwt',{session:false}),(req,res,next)=>{        
     res.json({user: req.user});
 })
 
-router.get('/find',(req,res,next)=>{
-    console.log('ik zit in router find')
+router.get('/find',(req,res,next)=>{    
     User.getUserById(req.body.id)
 })
 
