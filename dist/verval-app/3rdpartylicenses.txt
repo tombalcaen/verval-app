@@ -569,6 +569,8 @@ MIT
 
 @angular/material/icon
 
+@angular/material/slide-toggle
+
 @angular/service-worker
 MIT
 
