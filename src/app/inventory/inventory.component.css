@@ -32,6 +32,16 @@ li{
     margin: 0;
 }
 
+.touch-act{
+
+}
+
+@supports (touch-action: pan-y) {
+    .touch-act {
+      touch-action: pan-y;
+    }
+  }
+
 .bol{
     opacity: 0.5;
 }
