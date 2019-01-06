@@ -1,0 +1,32 @@
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.row{
+    padding: 0;
+    margin: 0;
+}
+
+.col-12{
+    padding: 0px;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+li{
+    padding: 0;
+    margin: 0;
+}
+
+.item-icon, .item-text, .item-continue{
+    padding: 10px;
+}
+
+.settings-item{
+    border-bottom: 1px solid #e0e0e0;
+}

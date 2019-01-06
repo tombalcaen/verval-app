@@ -1,0 +1,57 @@
+<div class="container-fluid">  
+    <div class="row" style="margin: 0">
+      <div class="col-12 text-center" style="width: 100%; background: linear-gradient(-90deg,#52e2ab,#56d4da); color: white; padding: 11px; font-weight: 700; font-size: 1.2em;">
+        <span style="float: left; padding: 0px 10px;">
+          <a (click)="cancel();">
+            <i class="fas fa-angle-left"></i>
+          </a>
+        </span>        
+        <span style="float: center;">Settings</span>
+      </div> 
+    </div>
+    <div class="row" style="padding: 0">
+      <div class="col-12" style="height: calc(100vh - 150px); overflow-y: scroll;">
+        <ul class="settings-items">
+          <li routerLink="/profile" class="col-12 settings-item" style="padding: 10px 0px;">
+            <div class="settings-item-container">
+              <div class="item-icon" style="float: left;">
+                <i class="fas fa-user-alt"></i>
+              </div>
+              <div class="item-text" style="display: inline-block">
+                Profile
+              </div>
+              <div class="item-continue" style="float: right;">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </li>
+          <li routerLink="/story" class="col-12 settings-item" style="cursor: pointer; padding: 10px 0px;">
+            <div class="settings-item-container">
+              <div class="item-icon" style="float: left;">
+                <i class="far fa-heart"></i>
+              </div>
+              <div class="item-text" style="display: inline-block">
+                Feedback
+              </div>
+              <div class="item-continue" style="float: right;">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </li>
+          <li (click)="logout()" class="col-12 settings-item" style="padding: 10px 0px;">
+            <div class="settings-item-container">
+              <div class="item-icon" style="float: left;">
+                <i class="fas fa-sign-out-alt"></i>
+              </div>
+              <div class="item-text" style="display: inline-block">
+                Logout
+              </div>
+              <div class="item-continue" style="float: right;">
+                <i class="fas fa-angle-right"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

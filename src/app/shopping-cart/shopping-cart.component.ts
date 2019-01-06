@@ -58,7 +58,7 @@ export class ShoppingCartComponent implements OnInit {
 
   deleteAll(){
     this._inventory.deleteAllBasket().then((data)=>{
-
+      this.initBasket();
     })
   }
 
@@ -67,7 +67,9 @@ export class ShoppingCartComponent implements OnInit {
   }
   
   generateFavorites(){
-    this._inventory.generateBasket();
+    this._inventory.generateBasket().then(()=>{
+      this.initBasket();
+    });
   }
 
 }

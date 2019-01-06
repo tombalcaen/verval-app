@@ -1,12 +1,12 @@
 <div class="pos-f-t bottom-nav" style="border-top: 1px solid whitesmoke; z-index: 10; background-color: white;">  
-  <div class="collapse" id="navbarToggleExternalContent">
+  <!-- <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark">
       <ul class="row">
-        <li routerLink='/favorites' class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
+        <li routerLink='/profile' class="col-12" style="padding: 15px; border-bottom: 1px solid #e0e0e0;">
           <a class="">
-            <div routerLink='/favorites'>
-              <span style="margin-right: 20px;"><i class="material-icons" style="vertical-align: middle;">star</i></span>
-              <span style="">My favorites</span>
+            <div routerLink='/profile'>
+              <span style="margin-right: 20px;"><i class="material-icons" style="vertical-align: middle;">person</i></span>
+              <span style="">Profile</span>
             </div>          
           </a>
         </li>
@@ -28,13 +28,13 @@
         </li>
       </ul>      
     </div>
-  </div>    
+  </div>     -->
   <nav class="container navbar-light" style="background-color: #e0e0e003; padding: 0;">    
     <ul class="row justify-content-around text-center">
       <!-- <li routerLink="/add" (click)="addItem()" style="position: absolute; left: calc(50% - 25px); bottom: 17px; height: 50px; width: 50px; border: 1px solid #78ff78bd; border-radius: 50%; background: #78ff78bd; z-index: 4;">
         <a style="font-size: 30px; line-height: normal; vertical-align: text-top; color: white; font-weight: 600;">+</a>
       </li> -->
-      <li class="col-3">
+      <li class="col-2">
         <a class="nav-link" routerLink="/inventory" routerLinkActive="router-link-active">
           <div>
             <span style="display: block;"><i class="nav-link-icon material-icons" style="vertical-align: middle;">receipt</i></span>
@@ -43,7 +43,7 @@
         </a>
       </li>
       
-      <li class="col-3">
+      <li class="col-2">
         <a class="nav-link" routerLink="/shopping-cart" routerLinkActive="router-link-active">
           <div>
             <span style="display: block;"><i class="nav-link-icon fas fa-shopping-basket"></i></span>
@@ -52,11 +52,15 @@
         </a>
       </li>
       <!-- <li class="col-2"></li> -->
-      <li class="col-3">
-        <a class="nav-link" routerLink="/profile" routerLinkActive="router-link-active">
-          <div>
+      <li class="col-2">
+        <a class="nav-link" routerLink="/favorites" routerLinkActive="router-link-active">
+          <!-- <div>
             <span style="display: block;"><i class="nav-link-icon material-icons" style="vertical-align: middle;">person</i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Profile</span>
+          </div> -->
+          <div>
+            <span style="display: block;"><i class="nav-link-icon material-icons" style="vertical-align: middle;">star</i></span>
+            <span style="display: block; font-size: 10px; vertical-align: top;">favorites</span>
           </div>          
         </a>
       </li>      
@@ -76,8 +80,9 @@
           </div>          
         </a>
       </li>-->
-      <li class="col-3">
-        <a class="nav-link" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <li class="col-2">
+        <a class="nav-link" routerLink="/settings" routerLinkActive="router-link-active">
+        <!-- <a class="nav-link" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation"> -->
           <div>
             <span style="display: block;"><i class="nav-link-icon fas fa-cog"></i></span>
             <span style="display: block; font-size: 10px; vertical-align: top;">Options</span>

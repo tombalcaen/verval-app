@@ -13,6 +13,7 @@ import { AuthService } from './service/auth.service';
 import { ScanComponent } from './scan/scan.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { OptionsComponent } from './options/options.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'scan',  component: ScanComponent, canActivate: [AuthService] },
   { path: 'shopping-cart',  component: ShoppingCartComponent, canActivate: [AuthService] },
   { path: 'register',  component: RegisterComponent },
+  { path: 'settings',  component: OptionsComponent },
   { path: 'login',  component: LoginComponent },
   /*{ path: 'emailverify',  component: EmailVerifyComponent },
   { path: 'register',  component: RegisterComponent },

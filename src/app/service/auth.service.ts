@@ -17,7 +17,9 @@ export class AuthService implements CanActivate{
 
   constructor(private _http: HttpClient,
               public jwtHelper: JwtHelperService,
-              private _router: Router) { }
+              private _router: Router) { 
+                                
+              }  
 
   canActivate(){
     if(!this.loggedIn()) return true;

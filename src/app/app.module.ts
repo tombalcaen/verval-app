@@ -36,6 +36,7 @@ import { ScanComponent } from './scan/scan.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { OptionsComponent } from './options/options.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -56,7 +57,8 @@ export function tokenGetter() {
     ScanComponent,
     ShoppingCartComponent,
     AddItemComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    OptionsComponent
   ],
   imports: [
     BrowserModule,
